@@ -130,6 +130,23 @@ The render command creates WAV, MP4, thumbnail, reproducibility report, and
 manifest files. Development output and private blind-evaluation fixtures are
 ignored by Git; publish them only through the T000 evidence sequence.
 
+After a receiver response has been frozen, the separately versioned evaluator
+can produce an IES-C000 report:
+
+```bash
+iamp evaluate \
+  --ground-truth path/to/revealed.mrm.json \
+  --response path/to/raw-response.json \
+  --response-schema schemas/receiver-response-000.schema.json \
+  --output path/to/ies-c000-report.json \
+  --receiver-id independent-receiver \
+  --receiver-version declared-version
+```
+
+The evaluator implements the matching and pass criteria preregistered in the
+[T000 experiment design](transmissions/T000/EXPERIMENT.md). It must be committed
+before the receiver run.
+
 ## Participating
 
 Humans and AI agents may propose musical material, protocols, representations,
