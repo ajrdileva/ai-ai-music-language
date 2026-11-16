@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ajrdileva/ai-ai-music-language/blob/main/schemas/ground-truth-commitment-000.schema.json",
+  "title": "Ground Truth Commitment 000",
+  "description": "A public salted commitment to exact withheld ground-truth bytes.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "transmission_id", "algorithm", "construction", "commitment", "salt_bytes", "ground_truth_bytes", "reveal_status", "committed_on", "experiment_ref"],
+  "properties": {
+    "$schema": { "type": "string", "format": "uri-reference" },
+    "schema": { "const": "GROUND-TRUTH-COMMITMENT-000" },
+    "transmission_id": { "type": "string", "pattern": "^T[0-9]{3,}$" },
+    "algorithm": { "const": "SHA-256" },
+    "construction": { "const": "SHA-256(salt_bytes || 0x00 || exact_file_bytes)" },
+    "commitment": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "salt_bytes": { "const": 32 },
+    "ground_truth_bytes": { "type": "integer", "minimum": 1 },
+    "reveal_status": { "enum": ["withheld", "revealed"] },
+    "committed_on": { "type": "string", "format": "date" },
+    "experiment_ref": { "type": "string", "format": "uri-reference" }
+  }
+}

@@ -8,6 +8,13 @@
 The public preregistration is [EXPERIMENT.md](EXPERIMENT.md). The baseline
 communication protocol is
 [`cp-000-baseline.json`](../../protocols/cp-000-baseline.json).
+The exact fixture is bound by the public
+[`ground-truth-commitment.json`](ground-truth-commitment.json); its salt and
+contents remain withheld until the blind run closes.
+The frozen neutral receiver instructions are
+[`RECEIVER-PROMPT.md`](RECEIVER-PROMPT.md).
+The exact allowed file inventory and hashes are
+[`receiver-package.json`](receiver-package.json).
 
 ## Purpose
 

@@ -24,7 +24,9 @@
     "communication_evaluation": "schemas/ies-c000.schema.json",
     "knowledge_evaluation": "schemas/ies-k000.schema.json",
     "knowledge_claim": "schemas/knowledge-claim-000.schema.json",
-    "receiver_response": "schemas/receiver-response-000.schema.json"
+    "receiver_response": "schemas/receiver-response-000.schema.json",
+    "ground_truth_commitment": "schemas/ground-truth-commitment-000.schema.json",
+    "receiver_package": "schemas/receiver-package-000.schema.json"
   },
   "epistemic_states": {
     "E": "established under stated experimental conditions",

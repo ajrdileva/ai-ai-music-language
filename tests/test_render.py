@@ -55,6 +55,27 @@ class RenderTests(unittest.TestCase):
             self.assertTrue((output / "T999-thumbnail.png").is_file())
             self.assertTrue((output / "manifest.json").is_file())
             self.assertEqual(len(manifest["artifacts"]), 4)
+            self.assertFalse(manifest["inputs"][0]["withheld"])
+            self.assertIn("sha256", manifest["inputs"][0])
+
+    @unittest.skipUnless(shutil.which("ffmpeg"), "ffmpeg not installed")
+    def test_withheld_input_uses_commitment_not_raw_hash(self) -> None:
+        commitment = "a" * 64
+        with tempfile.TemporaryDirectory() as directory:
+            manifest = render_transmission(
+                mrm_path=FIXTURE,
+                protocol_path=PROTOCOL,
+                output_dir=Path(directory) / "output",
+                transmission_id="T998",
+                config=VideoConfig(width=320, height=180, fps=2, lead_seconds=0, tail_seconds=0),
+                sample_rate=8000,
+                ground_truth_commitment=commitment,
+            )
+            reference = manifest["inputs"][0]
+            self.assertTrue(reference["withheld"])
+            self.assertEqual(reference["commitment_sha256"], commitment)
+            self.assertNotIn("sha256", reference)
+            self.assertEqual(reference["path"], "withheld-ground-truth.mrm.json")
 
 
 if __name__ == "__main__":

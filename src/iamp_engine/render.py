@@ -46,6 +46,7 @@ def render_transmission(
     config: VideoConfig | None = None,
     sample_rate: int = 48_000,
     ffmpeg: str | None = None,
+    ground_truth_commitment: str | None = None,
 ) -> dict[str, Any]:
     config = config or VideoConfig()
     config.validate()
@@ -58,6 +59,11 @@ def render_transmission(
     ffmpeg_path = ffmpeg or shutil.which("ffmpeg")
     if not ffmpeg_path:
         raise RuntimeError("ffmpeg is required to render MP4 output")
+    if ground_truth_commitment is not None:
+        if len(ground_truth_commitment) != 64 or any(
+            character not in "0123456789abcdef" for character in ground_truth_commitment
+        ):
+            raise ValueError("ground_truth_commitment must be a lowercase SHA-256 digest")
 
     audio_path = destination / f"{transmission_id}.wav"
     video_path = destination / f"{transmission_id}.mp4"
@@ -118,6 +124,18 @@ def render_transmission(
         artifact_record(thumbnail_path, role="thumbnail", relative_to=destination),
         artifact_record(report_path, role="reproducibility-report", relative_to=destination),
     ]
+    reference_input = {
+        "path": "withheld-ground-truth.mrm.json" if ground_truth_commitment else model_source.name,
+        "media_type": "application/json",
+        "bytes": model_source.stat().st_size,
+        "role": "musical-reference-model",
+        "withheld": ground_truth_commitment is not None,
+    }
+    if ground_truth_commitment:
+        reference_input["commitment_sha256"] = ground_truth_commitment
+    else:
+        reference_input["sha256"] = sha256(model_source)
+
     manifest = {
         "schema": "TRANSMISSION-MANIFEST-000",
         "transmission_id": transmission_id,
@@ -134,8 +152,8 @@ def render_transmission(
             "evaluator": {"id": "IES-C000", "version": "0.1-draft", "source_ref": "https://github.com/ajrdileva/ai-ai-music-language/blob/main/schemas/ies-c000.schema.json"},
         },
         "inputs": [
-            {"path": model_source.name, "media_type": "application/json", "bytes": model_source.stat().st_size, "sha256": sha256(model_source), "role": "musical-reference-model"},
-            {"path": protocol_source.name, "media_type": "application/json", "bytes": protocol_source.stat().st_size, "sha256": sha256(protocol_source), "role": "communication-protocol"},
+            reference_input,
+            {"path": protocol_source.name, "media_type": "application/json", "bytes": protocol_source.stat().st_size, "sha256": sha256(protocol_source), "role": "communication-protocol", "withheld": False},
         ],
         "artifacts": artifacts,
         "challenge": {

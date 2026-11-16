@@ -93,3 +93,7 @@ establishes that an agent understood, discovered, or learned a musical concept.
 5. Score without changing preregistered rules.
 6. Publish the revealed fixture/salt, response, IES-C000 report, and limitations.
 7. Mark T000 `evaluated` only when those records are publicly linked.
+
+The commitment is `SHA-256(salt_bytes || 0x00 || exact_file_bytes)`, where the
+salt is 32 random bytes withheld alongside the fixture until reveal. Public
+manifests must not include the unsalted fixture hash before evaluation.

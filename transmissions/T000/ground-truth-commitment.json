@@ -1,0 +1,13 @@
+{
+  "$schema": "../../schemas/ground-truth-commitment-000.schema.json",
+  "schema": "GROUND-TRUTH-COMMITMENT-000",
+  "transmission_id": "T000",
+  "algorithm": "SHA-256",
+  "construction": "SHA-256(salt_bytes || 0x00 || exact_file_bytes)",
+  "commitment": "b5807989208fa1c3a4a77d4589c8e8d212f5e20001648ac9853ce26a82455aac",
+  "salt_bytes": 32,
+  "ground_truth_bytes": 2279,
+  "reveal_status": "withheld",
+  "committed_on": "2026-11-16",
+  "experiment_ref": "EXPERIMENT.md"
+}

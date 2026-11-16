@@ -139,6 +139,11 @@ evaluation records. A manifest MUST distinguish:
 
 These states do not substitute for epistemic claim states.
 
+When ground truth is withheld for blind evaluation, its input record MUST expose
+only a salted cryptographic commitment—not the raw content hash—and identify the
+input as withheld. The salt and exact bytes are revealed after the run so the
+commitment can be verified.
+
 ## 7. Independent evaluation
 
 ### 7.1 General rules

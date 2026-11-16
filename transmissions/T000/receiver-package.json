@@ -1,0 +1,66 @@
+{
+  "$schema": "../../schemas/receiver-package-000.schema.json",
+  "schema": "RECEIVER-PACKAGE-000",
+  "transmission_id": "T000",
+  "package_version": "0.1.0",
+  "status": "frozen",
+  "frozen_on": "2026-11-16",
+  "ground_truth_commitment": "b5807989208fa1c3a4a77d4589c8e8d212f5e20001648ac9853ce26a82455aac",
+  "files": [
+    {
+      "path": "T000.mp4",
+      "role": "canonical-audiovisual-transmission",
+      "bytes": 261536,
+      "sha256": "735ca649cdcf482bbf5d65a66d8faf1ca4f9b267d5959b9dbd89289a0c2a282e"
+    },
+    {
+      "path": "T000.wav",
+      "role": "reference-audio-channel",
+      "bytes": 2112044,
+      "sha256": "8c50bfbe901177c711f6bbd11b49efd8b2416dc82171e593a1b2b57849e332ad"
+    },
+    {
+      "path": "T000-thumbnail.png",
+      "role": "declared-thumbnail",
+      "bytes": 19125,
+      "sha256": "52e198b7a3491bb1f93718f319600656c792c5f5aa046bc241acaf5a66cb1e14"
+    },
+    {
+      "path": "manifest.json",
+      "role": "transmission-manifest",
+      "bytes": 2863,
+      "sha256": "7b12d8121a72e9c60756a3782f95bad5b092a21833572bf90d3861b190cb5673"
+    },
+    {
+      "path": "reproducibility-report.json",
+      "role": "reproducibility-report",
+      "bytes": 909,
+      "sha256": "f9d1dec2c2af90d608f126142a508c884dbda2eb2209280a040c1f6838524c7f"
+    },
+    {
+      "path": "cp-000-baseline.json",
+      "role": "communication-protocol",
+      "bytes": 2560,
+      "sha256": "8f5de2492935394f8c52607bc3c228e6f8d27d799459339c9471a634b0c0f199"
+    },
+    {
+      "path": "receiver-response-000.schema.json",
+      "role": "required-response-schema",
+      "bytes": 1980,
+      "sha256": "8442a7f311f9cdc8e69bda8b7dc20690de5e8c4932cebf6315b0bf26c427ef1c"
+    },
+    {
+      "path": "RECEIVER-PROMPT.md",
+      "role": "neutral-receiver-instructions",
+      "bytes": 977,
+      "sha256": "6a73d122ea080663105e288e14d9ad8ab5b598f20e7e1fd189165be70b0ae888"
+    }
+  ],
+  "forbidden_context": [
+    "withheld MRM ground truth",
+    "private commitment salt",
+    "this project's prior conversations",
+    "renderer debug output",
+    "another receiver's answer"
+  ]
+}

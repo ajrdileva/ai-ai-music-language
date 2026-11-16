@@ -22,7 +22,7 @@
         "evaluator": { "$ref": "#/$defs/versionedComponent" }
       }
     },
-    "inputs": { "type": "array", "items": { "$ref": "#/$defs/artifact" } },
+    "inputs": { "type": "array", "items": { "$ref": "#/$defs/input" } },
     "artifacts": { "type": "array", "items": { "$ref": "#/$defs/artifact" } },
     "challenge": {
       "type": "object",
@@ -55,6 +55,24 @@
     }
   },
   "$defs": {
+    "input": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "media_type", "bytes", "role", "withheld"],
+      "properties": {
+        "path": { "type": "string", "minLength": 1 },
+        "media_type": { "type": "string", "minLength": 1 },
+        "bytes": { "type": "integer", "minimum": 0 },
+        "role": { "type": "string", "minLength": 1 },
+        "withheld": { "type": "boolean" },
+        "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "commitment_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+      },
+      "oneOf": [
+        { "required": ["sha256"], "not": { "required": ["commitment_sha256"] } },
+        { "required": ["commitment_sha256"], "not": { "required": ["sha256"] } }
+      ]
+    },
     "versionedComponent": {
       "type": "object",
       "additionalProperties": false,

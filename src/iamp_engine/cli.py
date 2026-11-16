@@ -30,6 +30,10 @@ def _parser() -> argparse.ArgumentParser:
     render.add_argument("--tail-seconds", type=float, default=1.0)
     render.add_argument("--sample-rate", type=int, default=48_000)
     render.add_argument("--ffmpeg")
+    render.add_argument(
+        "--ground-truth-commitment",
+        help="publish this salted SHA-256 commitment instead of the raw MRM hash",
+    )
     return parser
 
 
@@ -55,6 +59,7 @@ def main(argv: list[str] | None = None) -> int:
         config=config,
         sample_rate=args.sample_rate,
         ffmpeg=args.ffmpeg,
+        ground_truth_commitment=args.ground_truth_commitment,
     )
     print(json.dumps({"status": manifest["status"], "transmission_id": manifest["transmission_id"], "output": str(args.output.resolve())}, sort_keys=True))
     return 0
