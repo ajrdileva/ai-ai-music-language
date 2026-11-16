@@ -5,8 +5,9 @@
   "description": "Draft reference model for independently timed note events. Validation does not imply musical or experimental validity.",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schema", "id", "timebase", "tempo", "events", "provenance"],
+  "required": ["schema", "id", "timebase", "tempo", "duration_tick", "events", "provenance"],
   "properties": {
+    "$schema": { "type": "string", "format": "uri-reference" },
     "schema": { "const": "MRM-000" },
     "id": { "$ref": "#/$defs/stableId" },
     "timebase": {
@@ -21,6 +22,11 @@
       "type": "array",
       "minItems": 1,
       "items": { "$ref": "#/$defs/tempoEvent" }
+    },
+    "duration_tick": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Total reference duration, including leading or trailing silence. Must not precede any event ending."
     },
     "events": {
       "type": "array",

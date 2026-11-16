@@ -1,0 +1,62 @@
+{
+  "$schema": "../schemas/mrm-000.schema.json",
+  "schema": "MRM-000",
+  "id": "DEMO-REFERENCE-001",
+  "timebase": {
+    "ticks_per_quarter": 480
+  },
+  "tempo": [
+    {
+      "at_tick": 0,
+      "microseconds_per_quarter": 500000
+    }
+  ],
+  "duration_tick": 2880,
+  "events": [
+    {
+      "id": "demo-n001",
+      "type": "note",
+      "pitch": 57,
+      "onset_tick": 0,
+      "duration_tick": 480,
+      "velocity": 72
+    },
+    {
+      "id": "demo-n002",
+      "type": "note",
+      "pitch": 62,
+      "onset_tick": 480,
+      "duration_tick": 960,
+      "velocity": 88
+    },
+    {
+      "id": "demo-n003",
+      "type": "note",
+      "pitch": 68,
+      "onset_tick": 480,
+      "duration_tick": 480,
+      "velocity": 104
+    },
+    {
+      "id": "demo-n004",
+      "type": "note",
+      "pitch": 55,
+      "onset_tick": 1920,
+      "duration_tick": 480,
+      "velocity": 80
+    }
+  ],
+  "groups": [
+    {
+      "id": "demo-g001",
+      "type": "note_group",
+      "members": ["demo-n002", "demo-n003"]
+    }
+  ],
+  "provenance": {
+    "source_type": "structured-events",
+    "source_id": "public-development-demo",
+    "transformations": [],
+    "losses": []
+  }
+}

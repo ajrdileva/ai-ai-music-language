@@ -15,10 +15,11 @@ questions posed to participants are **challenges**.
 
 ## Current status
 
-**Foundation phase.** Foundation v0.2 and the first engine specification are
-documented. The schemas in this repository are drafts. No transmission engine,
-rendered Transmission 000, or independent decoding/knowledge evaluation has
-yet been completed.
+**Foundation phase with an initial reference renderer.** Foundation v0.2 and the
+first engine specification are documented, and a development renderer can
+generate audio, video, thumbnail, report, and manifest artifacts. The schemas
+and engine remain draft work. No canonical Transmission 000 or independent
+decoding/knowledge evaluation has yet been completed.
 
 | Item | Status | Authority |
 | --- | --- | --- |
@@ -26,6 +27,7 @@ yet been completed.
 | [Transmission Engine Specification v0.1](docs/transmission-engine-spec.md) | Draft | Proposed technical contract |
 | [Architecture](docs/architecture.md) | Draft | Design guide |
 | [JSON schemas](schemas/) | Draft | Candidate machine interfaces |
+| [Reference renderer](src/iamp_engine/) | Initial implementation | Development tool; not independently evaluated |
 | [Transmission 000](transmissions/T000/README.md) | Planned | First milestone |
 
 Nothing labeled `draft`, `planned`, `hypothesis`, or `unknown` should be read as
@@ -109,6 +111,25 @@ and protocol recovery.
 The milestone is complete only after the implementation, artifacts, and
 independent evaluation evidence exist. See the [T000 plan](transmissions/T000/README.md).
 
+## Rendering a development fixture
+
+The first implementation is a small Python renderer, not a composer. With
+Python 3.11+, Pillow, and FFmpeg available:
+
+```bash
+python -m pip install -e .
+iamp validate path/to/reference.mrm.json
+iamp render \
+  --mrm path/to/reference.mrm.json \
+  --protocol protocols/cp-000-baseline.json \
+  --output artifacts/T000 \
+  --transmission-id T000
+```
+
+The render command creates WAV, MP4, thumbnail, reproducibility report, and
+manifest files. Development output and private blind-evaluation fixtures are
+ignored by Git; publish them only through the T000 evidence sequence.
+
 ## Participating
 
 Humans and AI agents may propose musical material, protocols, representations,
@@ -128,7 +149,10 @@ PROJECT.json                       machine-readable cold-start index
 docs/architecture.md              component boundaries and data flow
 docs/transmission-engine-spec.md  proposed engine contract
 schemas/                           draft JSON Schema interfaces
+protocols/                         candidate communication protocols
+src/iamp_engine/                   deterministic reference renderer
 transmissions/T000/               first-milestone plan (not results)
+tests/                              engine unit and smoke tests
 CONTRIBUTING.md                    human/AI contribution conventions
 ```
 

@@ -7,6 +7,7 @@
   "additionalProperties": false,
   "required": ["schema", "protocol", "maturity", "target_model", "framing", "channels", "bootstrap", "response", "limitations"],
   "properties": {
+    "$schema": { "type": "string", "format": "uri-reference" },
     "schema": { "const": "CP-000" },
     "protocol": {
       "type": "object",
