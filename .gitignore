@@ -18,10 +18,13 @@ __pycache__/
 build/
 dist/
 artifacts/
+!transmissions/T000/artifacts/
 .private/
 *.wav
+!transmissions/T000/artifacts/T000.wav
 *.mp3
 *.mp4
+!transmissions/T000/artifacts/T000.mp4
 
 # Editors and operating systems
 .DS_Store

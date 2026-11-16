@@ -1,0 +1,39 @@
+{
+  "schema": "RECEIVER-RESPONSE-000",
+  "transmission_id": "T000",
+  "protocol": {
+    "id": "IAMP-CP-BASELINE",
+    "version": "0.1.0",
+    "recovered_without_extra_context": true
+  },
+  "reconstructed_events": [
+    { "id": "e01", "pitch": 60, "onset_tick": 0, "duration_tick": 480, "velocity": 80, "confidence": 0.95 },
+    { "id": "e02", "pitch": 65, "onset_tick": 480, "duration_tick": 240, "velocity": 96, "confidence": 0.94 },
+    { "id": "e03", "pitch": 71, "onset_tick": 960, "duration_tick": 480, "velocity": 112, "confidence": 0.95 },
+    { "id": "e04", "pitch": 60, "onset_tick": 1920, "duration_tick": 1440, "velocity": 80, "confidence": 0.95 },
+    { "id": "e05", "pitch": 65, "onset_tick": 1920, "duration_tick": 960, "velocity": 96, "confidence": 0.95 },
+    { "id": "e06", "pitch": 71, "onset_tick": 1920, "duration_tick": 480, "velocity": 112, "confidence": 0.95 },
+    { "id": "e07", "pitch": 60, "onset_tick": 3840, "duration_tick": 1440, "velocity": 80, "confidence": 0.95 },
+    { "id": "e08", "pitch": 65, "onset_tick": 4320, "duration_tick": 960, "velocity": 96, "confidence": 0.95 },
+    { "id": "e09", "pitch": 71, "onset_tick": 4800, "duration_tick": 480, "velocity": 112, "confidence": 0.95 },
+    { "id": "e10", "pitch": 71, "onset_tick": 5760, "duration_tick": 240, "velocity": 112, "confidence": 0.94 },
+    { "id": "e11", "pitch": 65, "onset_tick": 6240, "duration_tick": 480, "velocity": 96, "confidence": 0.95 },
+    { "id": "e12", "pitch": 60, "onset_tick": 6720, "duration_tick": 480, "velocity": 80, "confidence": 0.95 }
+  ],
+  "uncertainty": [
+    "I could not subjectively audition the media. T000.wav was inspected through codec metadata, silence timing, and signal-level analysis; T000.mp4 was inspected through decoded-frame OCR; T000-thumbnail.png was visually inspected.",
+    "Pitch, onset, and duration were recovered from the labeled piano-roll grid using the declared resolution of 480 ticks per quarter note.",
+    "Velocity values are inferred from three internally consistent visual brightness and audio amplitude levels. The package supplies no numeric velocity legend, so velocity is less certain than pitch and timing.",
+    "No external sources, withheld ground truth, private files, repository files outside the receiver package, prior conversations, renderer debug output, or another receiver response were consulted."
+  ],
+  "context_used": [
+    "RECEIVER-PROMPT.md",
+    "receiver-package.json",
+    "cp-000-baseline.json",
+    "manifest.json",
+    "receiver-response-000.schema.json",
+    "T000.mp4",
+    "T000.wav",
+    "T000-thumbnail.png"
+  ]
+}

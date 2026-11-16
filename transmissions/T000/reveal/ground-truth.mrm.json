@@ -1,0 +1,40 @@
+{
+  "schema": "MRM-000",
+  "id": "T000-GROUND-TRUTH",
+  "timebase": {
+    "ticks_per_quarter": 480
+  },
+  "tempo": [
+    {
+      "at_tick": 0,
+      "microseconds_per_quarter": 500000
+    }
+  ],
+  "duration_tick": 7680,
+  "events": [
+    { "id": "t000-n001", "type": "note", "pitch": 60, "onset_tick": 0, "duration_tick": 480, "velocity": 70 },
+    { "id": "t000-n002", "type": "note", "pitch": 65, "onset_tick": 480, "duration_tick": 240, "velocity": 85 },
+    { "id": "t000-n003", "type": "note", "pitch": 71, "onset_tick": 960, "duration_tick": 480, "velocity": 100 },
+    { "id": "t000-n004", "type": "note", "pitch": 60, "onset_tick": 1920, "duration_tick": 1440, "velocity": 70 },
+    { "id": "t000-n005", "type": "note", "pitch": 65, "onset_tick": 1920, "duration_tick": 960, "velocity": 85 },
+    { "id": "t000-n006", "type": "note", "pitch": 71, "onset_tick": 1920, "duration_tick": 480, "velocity": 100 },
+    { "id": "t000-n007", "type": "note", "pitch": 60, "onset_tick": 3840, "duration_tick": 1440, "velocity": 70 },
+    { "id": "t000-n008", "type": "note", "pitch": 65, "onset_tick": 4320, "duration_tick": 960, "velocity": 85 },
+    { "id": "t000-n009", "type": "note", "pitch": 71, "onset_tick": 4800, "duration_tick": 480, "velocity": 100 },
+    { "id": "t000-n010", "type": "note", "pitch": 71, "onset_tick": 5760, "duration_tick": 240, "velocity": 100 },
+    { "id": "t000-n011", "type": "note", "pitch": 65, "onset_tick": 6240, "duration_tick": 480, "velocity": 85 },
+    { "id": "t000-n012", "type": "note", "pitch": 60, "onset_tick": 6720, "duration_tick": 480, "velocity": 70 }
+  ],
+  "groups": [
+    { "id": "t000-phase-sequence", "type": "temporal_phase", "members": ["t000-n001", "t000-n002", "t000-n003"] },
+    { "id": "t000-phase-compression", "type": "temporal_phase", "members": ["t000-n004", "t000-n005", "t000-n006"] },
+    { "id": "t000-phase-convergence", "type": "temporal_phase", "members": ["t000-n007", "t000-n008", "t000-n009"] },
+    { "id": "t000-phase-return", "type": "temporal_phase", "members": ["t000-n010", "t000-n011", "t000-n012"] }
+  ],
+  "provenance": {
+    "source_type": "structured-events",
+    "source_id": "withheld-t000-fixture-v0.1",
+    "transformations": ["human-authored diagnostic fixture"],
+    "losses": []
+  }
+}

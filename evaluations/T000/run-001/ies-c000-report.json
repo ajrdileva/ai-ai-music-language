@@ -1,0 +1,157 @@
+{
+  "configuration": {
+    "context_provided": [
+      "RECEIVER-PROMPT.md",
+      "receiver-package.json",
+      "cp-000-baseline.json",
+      "manifest.json",
+      "receiver-response-000.schema.json",
+      "T000.mp4",
+      "T000.wav",
+      "T000-thumbnail.png"
+    ],
+    "ground_truth_ref": "transmissions/T000/reveal/ground-truth.mrm.json",
+    "metrics_preregistered": true,
+    "receiver": {
+      "id": "codex-independent-agent",
+      "version": "gpt-5"
+    },
+    "tolerances": {
+      "duration_ticks": 60,
+      "onset_ticks": 60,
+      "velocity_units_secondary": 8
+    }
+  },
+  "evaluation_id": "T000-IES-C000-RUN-001",
+  "independence": {
+    "candidate_authored_verdict": false,
+    "evaluator_id": "iamp-t000-evaluator",
+    "evaluator_version": "0.1.0",
+    "rationale": "Scoring code and thresholds were committed before the receiver run; the receiver does not assign the verdict."
+  },
+  "limitations": [
+    "This is a single receiver run.",
+    "CP-000 directly labels the MIDI pitch axis and is a baseline rather than a compressed protocol.",
+    "Velocity is reported as a secondary, non-gating metric in v0.1."
+  ],
+  "runs": [
+    {
+      "metrics": {
+        "common_ending_relations_exact": true,
+        "context_disclosed": true,
+        "duration_mae_ticks": 0.0,
+        "duration_within_60_ticks": 1.0,
+        "event_f1": 1.0,
+        "event_precision": 1.0,
+        "event_recall": 1.0,
+        "forbidden_context_used": false,
+        "matched_event_count": 12,
+        "matches": [
+          {
+            "duration_error_ticks": 0,
+            "onset_error_ticks": 0,
+            "response_event_id": "e01",
+            "truth_event_id": "t000-n001",
+            "velocity_error": 10
+          },
+          {
+            "duration_error_ticks": 0,
+            "onset_error_ticks": 0,
+            "response_event_id": "e02",
+            "truth_event_id": "t000-n002",
+            "velocity_error": 11
+          },
+          {
+            "duration_error_ticks": 0,
+            "onset_error_ticks": 0,
+            "response_event_id": "e03",
+            "truth_event_id": "t000-n003",
+            "velocity_error": 12
+          },
+          {
+            "duration_error_ticks": 0,
+            "onset_error_ticks": 0,
+            "response_event_id": "e04",
+            "truth_event_id": "t000-n004",
+            "velocity_error": 10
+          },
+          {
+            "duration_error_ticks": 0,
+            "onset_error_ticks": 0,
+            "response_event_id": "e05",
+            "truth_event_id": "t000-n005",
+            "velocity_error": 11
+          },
+          {
+            "duration_error_ticks": 0,
+            "onset_error_ticks": 0,
+            "response_event_id": "e06",
+            "truth_event_id": "t000-n006",
+            "velocity_error": 12
+          },
+          {
+            "duration_error_ticks": 0,
+            "onset_error_ticks": 0,
+            "response_event_id": "e07",
+            "truth_event_id": "t000-n007",
+            "velocity_error": 10
+          },
+          {
+            "duration_error_ticks": 0,
+            "onset_error_ticks": 0,
+            "response_event_id": "e08",
+            "truth_event_id": "t000-n008",
+            "velocity_error": 11
+          },
+          {
+            "duration_error_ticks": 0,
+            "onset_error_ticks": 0,
+            "response_event_id": "e09",
+            "truth_event_id": "t000-n009",
+            "velocity_error": 12
+          },
+          {
+            "duration_error_ticks": 0,
+            "onset_error_ticks": 0,
+            "response_event_id": "e10",
+            "truth_event_id": "t000-n010",
+            "velocity_error": 12
+          },
+          {
+            "duration_error_ticks": 0,
+            "onset_error_ticks": 0,
+            "response_event_id": "e11",
+            "truth_event_id": "t000-n011",
+            "velocity_error": 11
+          },
+          {
+            "duration_error_ticks": 0,
+            "onset_error_ticks": 0,
+            "response_event_id": "e12",
+            "truth_event_id": "t000-n012",
+            "velocity_error": 10
+          }
+        ],
+        "onset_mae_ticks": 0.0,
+        "onset_within_60_ticks": 1.0,
+        "overlap_recovery": 1.0,
+        "overlap_relations_exact": true,
+        "pitch_accuracy": 1.0,
+        "protocol_recovered": true,
+        "response_event_count": 12,
+        "simultaneous_relations_exact": true,
+        "truth_event_count": 12,
+        "velocity_mae": 11.0,
+        "velocity_within_8_units": 0.0
+      },
+      "raw_response_ref": "raw-response.json",
+      "run_id": "run-001"
+    }
+  ],
+  "schema": "IES-C000",
+  "transmission_id": "T000",
+  "verdict": {
+    "status": "pass",
+    "summary": "All preregistered T000 communication thresholds passed."
+  }
+}

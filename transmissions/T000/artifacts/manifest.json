@@ -1,0 +1,97 @@
+{
+  "artifacts": [
+    {
+      "bytes": 2112044,
+      "media_type": "audio/wav",
+      "path": "T000.wav",
+      "role": "reference-audio",
+      "sha256": "8c50bfbe901177c711f6bbd11b49efd8b2416dc82171e593a1b2b57849e332ad"
+    },
+    {
+      "bytes": 261536,
+      "media_type": "video/mp4",
+      "path": "T000.mp4",
+      "role": "canonical-video",
+      "sha256": "735ca649cdcf482bbf5d65a66d8faf1ca4f9b267d5959b9dbd89289a0c2a282e"
+    },
+    {
+      "bytes": 19125,
+      "media_type": "image/png",
+      "path": "T000-thumbnail.png",
+      "role": "thumbnail",
+      "sha256": "52e198b7a3491bb1f93718f319600656c792c5f5aa046bc241acaf5a66cb1e14"
+    },
+    {
+      "bytes": 909,
+      "media_type": "application/json",
+      "path": "reproducibility-report.json",
+      "role": "reproducibility-report",
+      "sha256": "f9d1dec2c2af90d608f126142a508c884dbda2eb2209280a040c1f6838524c7f"
+    }
+  ],
+  "challenge": {
+    "id": "T000-reconstruct",
+    "instructions": "Recover the transmitted note events using only the published cold-start package.",
+    "response_schema": "https://github.com/ajrdileva/ai-ai-music-language/blob/main/schemas/receiver-response-000.schema.json",
+    "type": "protocol"
+  },
+  "claims": [],
+  "components": {
+    "evaluator": {
+      "id": "IES-C000",
+      "source_ref": "https://github.com/ajrdileva/ai-ai-music-language/blob/main/schemas/ies-c000.schema.json",
+      "version": "0.1-draft"
+    },
+    "protocol": {
+      "id": "IAMP-CP-BASELINE",
+      "source_ref": "https://github.com/ajrdileva/ai-ai-music-language/blob/main/protocols/cp-000-baseline.json",
+      "version": "0.1.0"
+    },
+    "reference_model": {
+      "id": "MRM-000",
+      "source_ref": "urn:iamp:T000:reference-model",
+      "version": "0.1-draft"
+    },
+    "renderer": {
+      "id": "iamp-transmission-engine",
+      "source_ref": "https://github.com/ajrdileva/ai-ai-music-language",
+      "version": "0.1.0"
+    }
+  },
+  "entry_points": [
+    "README.md",
+    "protocols/cp-000-baseline.json"
+  ],
+  "evaluations": [
+    {
+      "status": "planned",
+      "track": "communication"
+    },
+    {
+      "status": "not-planned",
+      "track": "knowledge"
+    }
+  ],
+  "foundation_version": "0.2",
+  "inputs": [
+    {
+      "bytes": 2279,
+      "commitment_sha256": "b5807989208fa1c3a4a77d4589c8e8d212f5e20001648ac9853ce26a82455aac",
+      "media_type": "application/json",
+      "path": "withheld-ground-truth.mrm.json",
+      "role": "musical-reference-model",
+      "withheld": true
+    },
+    {
+      "bytes": 2560,
+      "media_type": "application/json",
+      "path": "cp-000-baseline.json",
+      "role": "communication-protocol",
+      "sha256": "8f5de2492935394f8c52607bc3c228e6f8d27d799459339c9471a634b0c0f199",
+      "withheld": false
+    }
+  ],
+  "schema": "TRANSMISSION-MANIFEST-000",
+  "status": "generated",
+  "transmission_id": "T000"
+}
