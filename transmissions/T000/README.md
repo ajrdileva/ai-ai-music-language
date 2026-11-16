@@ -1,16 +1,20 @@
 # Transmission 000 — Baseline Reconstruction
 
-**Status:** Planned  
-**Artifacts:** None generated  
-**Independent tests:** None run  
-**Knowledge evaluation:** Out of scope for the initial baseline unless amended
+**Status:** Communication baseline evaluated — Run 001 passed
+
+**Artifacts:** Published with frozen hashes
+
+**Independent tests:** One cold-start receiver run complete
+
+**Knowledge evaluation:** Not run; out of scope for this baseline
 
 The public preregistration is [EXPERIMENT.md](EXPERIMENT.md). The baseline
 communication protocol is
 [`cp-000-baseline.json`](../../protocols/cp-000-baseline.json).
-The exact fixture is bound by the public
+Before the run, the exact fixture was bound by the public
 [`ground-truth-commitment.json`](ground-truth-commitment.json); its salt and
-contents remain withheld until the blind run closes.
+contents are now published in [`reveal/`](reveal/) so the commitment can be
+verified.
 The frozen neutral receiver instructions are
 [`RECEIVER-PROMPT.md`](RECEIVER-PROMPT.md).
 The exact allowed file inventory and hashes are
@@ -64,6 +68,8 @@ content-addressed public record.
 
 ## Non-claims
 
-This directory does not claim that the engine exists, that T000 has been
-rendered, that an agent has decoded it, or that any musical knowledge has been
-discovered. Its contents are a milestone plan.
+Run 001 establishes only that one independent receiver recovered the baseline
+communication target under the recorded conditions. It does not establish that
+the protocol generalizes, that other agents will succeed, or that any musical
+knowledge was understood, learned, or discovered. Velocity recovery missed the
+secondary tolerance and is preserved as an experimental limitation.

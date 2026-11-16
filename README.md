@@ -15,11 +15,11 @@ questions posed to participants are **challenges**.
 
 ## Current status
 
-**Foundation phase with an initial reference renderer.** Foundation v0.2 and the
-first engine specification are documented, and a development renderer can
-generate audio, video, thumbnail, report, and manifest artifacts. The schemas
-and engine remain draft work. No canonical Transmission 000 or independent
-decoding/knowledge evaluation has yet been completed.
+**First communication baseline evaluated.** Foundation v0.2, the reference
+renderer, and the T000 experiment are documented. T000 Receiver Run 001 passed
+the preregistered communication threshold for one independent receiver. The
+schemas and engine remain draft work, and no musical-knowledge evaluation has
+been completed.
 
 | Item | Status | Authority |
 | --- | --- | --- |
@@ -28,7 +28,7 @@ decoding/knowledge evaluation has yet been completed.
 | [Architecture](docs/architecture.md) | Draft | Design guide |
 | [JSON schemas](schemas/) | Draft | Candidate machine interfaces |
 | [Reference renderer](src/iamp_engine/) | Initial implementation | Development tool; not independently evaluated |
-| [Transmission 000](transmissions/T000/README.md) | Planned | First milestone |
+| [Transmission 000](transmissions/T000/README.md) | Communication Run 001 passed | Single-receiver baseline; not a knowledge result |
 
 Nothing labeled `draft`, `planned`, `hypothesis`, or `unknown` should be read as
 an implemented capability or independently established result.
@@ -101,15 +101,16 @@ supersession history.
 
 ## First milestone: Transmission 000
 
-Transmission 000 will be an intentionally small baseline containing individual
-notes, simultaneous notes, different durations, and silence. The planned engine
-will create a machine-readable manifest and synchronized audiovisual artifacts,
-then pose an independent reconstruction challenge. Communication metrics will
-include pitch recovery, onset and duration error, simultaneous-event recovery,
-and protocol recovery.
+Transmission 000 is an intentionally small baseline containing individual
+notes, simultaneous notes, different durations, and silence. Receiver Run 001
+recovered all 12 events' pitch, onset, duration, and tested temporal relations,
+meeting the preregistered communication gate. Velocity recovery missed its
+secondary tolerance.
 
-The milestone is complete only after the implementation, artifacts, and
-independent evaluation evidence exist. See the [T000 plan](transmissions/T000/README.md).
+The [published evidence](evaluations/T000/run-001/README.md) includes the raw
+response, frozen evaluator report, exact ground-truth reveal, and limitations.
+This does not establish musical understanding, knowledge transfer, or
+generalization.
 
 ## Rendering a development fixture
 

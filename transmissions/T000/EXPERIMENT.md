@@ -1,8 +1,13 @@
 # T000 Experiment Design v0.1
 
-**Status:** Preregistered design draft; no receiver run completed  
+**Status:** Design frozen before Receiver Run 001; run completed and published
+
 **Question:** Can an unfamiliar capable AI recover the independent MRM-000 note
 events using only the published cold-start package?
+
+**Outcome:** Run 001 passed the preregistered communication threshold. See the
+[evaluation record](../../evaluations/T000/run-001/README.md). The design below
+is preserved as the pre-run contract rather than rewritten around the result.
 
 ## Candidate
 

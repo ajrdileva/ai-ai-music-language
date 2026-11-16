@@ -1,0 +1,32 @@
+{
+  "configuration": {
+    "fps": 30,
+    "height": 720,
+    "lead_seconds": 2.0,
+    "sample_rate": 48000,
+    "tail_seconds": 1.0,
+    "width": 1280
+  },
+  "engine": {
+    "name": "iamp-transmission-engine",
+    "version": "0.1.0"
+  },
+  "environment": {
+    "ffmpeg": "ffmpeg version 6.1.1 Copyright (c) 2000-2023 the FFmpeg developers",
+    "pillow": "11.3.0",
+    "platform": "macOS-26.5.1-arm64-arm-64bit",
+    "python": "3.11.2"
+  },
+  "reproducibility": {
+    "audio": "deterministic for the same Python/runtime inputs",
+    "video": "perceptually reproducible; byte identity depends on FFmpeg/x264",
+    "visual_frames": "deterministic for the same Pillow/font environment"
+  },
+  "schema": "REPRODUCIBILITY-REPORT-000",
+  "transmission_id": "T000",
+  "validation": {
+    "independent_evaluation": "not-run",
+    "mrm_semantic_validation": "passed",
+    "protocol_minimum_validation": "passed"
+  }
+}

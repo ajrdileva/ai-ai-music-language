@@ -7,8 +7,9 @@
     "phase": "foundation",
     "foundation": "accepted",
     "engine": "initial-implementation",
-    "transmission_000": "planned",
-    "independent_tests": "not-run"
+    "transmission_000": "communication-baseline-evaluated",
+    "independent_tests": "run-001-pass",
+    "knowledge_evaluation": "not-run"
   },
   "cold_start": [
     "README.md",
