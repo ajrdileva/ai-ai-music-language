@@ -6,7 +6,7 @@
   "status": {
     "phase": "foundation",
     "foundation": "accepted",
-    "engine": "not-implemented",
+    "engine": "initial-implementation",
     "transmission_000": "planned",
     "independent_tests": "not-run"
   },
@@ -23,7 +23,8 @@
     "transmission_manifest": "schemas/transmission-manifest-000.schema.json",
     "communication_evaluation": "schemas/ies-c000.schema.json",
     "knowledge_evaluation": "schemas/ies-k000.schema.json",
-    "knowledge_claim": "schemas/knowledge-claim-000.schema.json"
+    "knowledge_claim": "schemas/knowledge-claim-000.schema.json",
+    "receiver_response": "schemas/receiver-response-000.schema.json"
   },
   "epistemic_states": {
     "E": "established under stated experimental conditions",

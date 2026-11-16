@@ -1,0 +1,77 @@
+{
+  "$schema": "../schemas/cp-000.schema.json",
+  "schema": "CP-000",
+  "protocol": {
+    "id": "IAMP-CP-BASELINE",
+    "version": "0.1.0",
+    "name": "Cumulative Piano-Roll Baseline"
+  },
+  "maturity": "draft",
+  "target_model": {
+    "id": "MRM-000",
+    "relationship": "lossless",
+    "losses": []
+  },
+  "framing": {
+    "unit": "one note event represented as one horizontal bar",
+    "ordering": "left-to-right onset time; lower-to-higher MIDI pitch vertically",
+    "termination": "the visual playhead reaches the right boundary and the audio tail ends",
+    "synchronization": "visual time and synthesized audio share the MRM tempo map"
+  },
+  "channels": [
+    {
+      "id": "audio",
+      "medium": "audio",
+      "required": true,
+      "semantics": "equal-tempered sine-dominant tones; pitch follows MIDI pitch and amplitude follows velocity"
+    },
+    {
+      "id": "piano-roll",
+      "medium": "visual",
+      "required": true,
+      "semantics": "bar x-position/width encode onset/duration, row encodes MIDI pitch, and brightness encodes velocity"
+    },
+    {
+      "id": "manifest",
+      "medium": "json",
+      "required": true,
+      "semantics": "identifies versions, inputs, artifacts, hashes, challenge, and evaluation status"
+    }
+  ],
+  "symbols": [
+    {
+      "symbol": "horizontal note bar",
+      "meaning": "one independent MRM-000 note event",
+      "examples": []
+    },
+    {
+      "symbol": "vertical playhead",
+      "meaning": "current transmission time",
+      "examples": []
+    },
+    {
+      "symbol": "empty time interval",
+      "meaning": "silence when no note bar intersects the interval",
+      "examples": []
+    }
+  ],
+  "bootstrap": {
+    "self_identification": "IAMP / transmission ID and MRM-000 · CP-000 are displayed in the canonical video",
+    "human_notice_separate": true,
+    "entry_points": [
+      "../README.md",
+      "../docs/transmission-engine-spec.md",
+      "../schemas/receiver-response-000.schema.json"
+    ]
+  },
+  "response": {
+    "schema_ref": "../schemas/receiver-response-000.schema.json",
+    "submission_instructions": "Return one receiver-response-000 JSON object and preserve uncertainty without consulting withheld ground truth."
+  },
+  "integrity": [],
+  "limitations": [
+    "The baseline directly exposes MIDI pitch labels and is designed for measurement rather than compression.",
+    "Font and codec implementations can prevent byte-identical video across platforms.",
+    "This protocol communicates reference events; it does not assert a musical interpretation."
+  ]
+}

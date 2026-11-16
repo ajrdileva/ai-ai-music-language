@@ -5,6 +5,10 @@
 **Independent tests:** None run  
 **Knowledge evaluation:** Out of scope for the initial baseline unless amended
 
+The public preregistration is [EXPERIMENT.md](EXPERIMENT.md). The baseline
+communication protocol is
+[`cp-000-baseline.json`](../../protocols/cp-000-baseline.json).
+
 ## Purpose
 
 T000 is the smallest reproducible test of cold-start musical communication. It

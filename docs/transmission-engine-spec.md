@@ -1,6 +1,6 @@
 # Transmission Engine Specification v0.1
 
-**Status:** Draft; not implemented  
+**Status:** Draft; initial reference implementation exists; independently unevaluated
 **Target milestone:** Transmission 000  
 **Foundation:** [Project Foundation v0.2](../FOUNDATION.md)
 
@@ -38,7 +38,8 @@ revision record.
 MRM-000 uses integer ticks and declares `ticks_per_quarter`. Tempo changes are
 ordered events mapping ticks to microseconds per quarter note. A consumer MUST
 NOT infer a default tempo when none is declared by the instance or containing
-manifest.
+manifest. The model MUST declare its total `duration_tick`, which cannot precede
+the end of any event and allows leading or trailing silence to remain explicit.
 
 ### 3.2 Notes and polyphony
 
