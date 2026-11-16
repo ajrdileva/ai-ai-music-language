@@ -7,6 +7,7 @@ import json
 from pathlib import Path
 
 from .model import load_mrm
+from .evaluate import evaluate_response
 from .render import render_transmission
 from .visual import VideoConfig
 
@@ -34,6 +35,14 @@ def _parser() -> argparse.ArgumentParser:
         "--ground-truth-commitment",
         help="publish this salted SHA-256 commitment instead of the raw MRM hash",
     )
+
+    evaluate = subcommands.add_parser("evaluate", help="score a frozen receiver response with IES-C000")
+    evaluate.add_argument("--ground-truth", required=True, type=Path)
+    evaluate.add_argument("--response", required=True, type=Path)
+    evaluate.add_argument("--response-schema", required=True, type=Path)
+    evaluate.add_argument("--output", required=True, type=Path)
+    evaluate.add_argument("--receiver-id", required=True)
+    evaluate.add_argument("--receiver-version", required=True)
     return parser
 
 
@@ -42,6 +51,17 @@ def main(argv: list[str] | None = None) -> int:
     if args.command == "validate":
         model = load_mrm(args.mrm)
         print(json.dumps({"status": "valid", "schema": "MRM-000", "id": model.id, "events": len(model.events)}, sort_keys=True))
+        return 0
+    if args.command == "evaluate":
+        report = evaluate_response(
+            ground_truth_path=args.ground_truth,
+            response_path=args.response,
+            response_schema_path=args.response_schema,
+            output_path=args.output,
+            receiver_id=args.receiver_id,
+            receiver_version=args.receiver_version,
+        )
+        print(json.dumps({"evaluation_id": report["evaluation_id"], "verdict": report["verdict"]}, sort_keys=True))
         return 0
 
     config = VideoConfig(
