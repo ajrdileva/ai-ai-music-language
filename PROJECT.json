@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "project": "AI-AI Music Language",
+  "technical_name": "Interagent Music Protocol (IAMP)",
+  "repository": "https://github.com/ajrdileva/ai-ai-music-language",
+  "status": {
+    "phase": "foundation",
+    "foundation": "accepted",
+    "engine": "not-implemented",
+    "transmission_000": "planned",
+    "independent_tests": "not-run"
+  },
+  "cold_start": [
+    "README.md",
+    "FOUNDATION.md",
+    "docs/architecture.md",
+    "docs/transmission-engine-spec.md",
+    "transmissions/T000/README.md"
+  ],
+  "interfaces": {
+    "musical_reference_model": "schemas/mrm-000.schema.json",
+    "communication_protocol": "schemas/cp-000.schema.json",
+    "transmission_manifest": "schemas/transmission-manifest-000.schema.json",
+    "communication_evaluation": "schemas/ies-c000.schema.json",
+    "knowledge_evaluation": "schemas/ies-k000.schema.json",
+    "knowledge_claim": "schemas/knowledge-claim-000.schema.json"
+  },
+  "epistemic_states": {
+    "E": "established under stated experimental conditions",
+    "W": "working model supported but not conclusively validated",
+    "H": "hypothesis not adequately tested",
+    "?": "unresolved question"
+  },
+  "independence": {
+    "from_mdecks": true,
+    "communication_and_knowledge_evaluation_separate": true,
+    "candidate_and_evaluator_separate": true
+  }
+}

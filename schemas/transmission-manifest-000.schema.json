@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ajrdileva/ai-ai-music-language/blob/main/schemas/transmission-manifest-000.schema.json",
+  "title": "Transmission Manifest 000",
+  "description": "Draft inventory and provenance record for one transmission.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "transmission_id", "status", "foundation_version", "components", "artifacts", "challenge", "evaluations"],
+  "properties": {
+    "schema": { "const": "TRANSMISSION-MANIFEST-000" },
+    "transmission_id": { "type": "string", "pattern": "^T[0-9]{3,}$" },
+    "status": { "enum": ["planned", "generated", "validated", "evaluated"] },
+    "foundation_version": { "const": "0.2" },
+    "components": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["reference_model", "protocol", "renderer", "evaluator"],
+      "properties": {
+        "reference_model": { "$ref": "#/$defs/versionedComponent" },
+        "protocol": { "$ref": "#/$defs/versionedComponent" },
+        "renderer": { "$ref": "#/$defs/versionedComponent" },
+        "evaluator": { "$ref": "#/$defs/versionedComponent" }
+      }
+    },
+    "inputs": { "type": "array", "items": { "$ref": "#/$defs/artifact" } },
+    "artifacts": { "type": "array", "items": { "$ref": "#/$defs/artifact" } },
+    "challenge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "type", "instructions", "response_schema"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "type": { "enum": ["protocol", "music", "mixed"] },
+        "instructions": { "type": "string", "minLength": 1 },
+        "response_schema": { "type": "string", "format": "uri-reference" }
+      }
+    },
+    "entry_points": {
+      "type": "array",
+      "items": { "type": "string", "format": "uri-reference" }
+    },
+    "claims": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+    "evaluations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["track", "status"],
+        "properties": {
+          "track": { "enum": ["communication", "knowledge"] },
+          "status": { "enum": ["not-planned", "planned", "in-progress", "complete"] },
+          "record_ref": { "type": "string", "format": "uri-reference" }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "$defs": {
+    "versionedComponent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "version", "source_ref"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "version": { "type": "string", "minLength": 1 },
+        "source_ref": { "type": "string", "format": "uri-reference" },
+        "commit": { "type": "string", "pattern": "^[a-f0-9]{40}$" }
+      }
+    },
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "media_type", "bytes", "sha256"],
+      "properties": {
+        "path": { "type": "string", "minLength": 1 },
+        "media_type": { "type": "string", "minLength": 1 },
+        "bytes": { "type": "integer", "minimum": 0 },
+        "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "role": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}

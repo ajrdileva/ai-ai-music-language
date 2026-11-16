@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ajrdileva/ai-ai-music-language/blob/main/schemas/ies-c000.schema.json",
+  "title": "Independent Evaluation Schema — Communication 000",
+  "description": "Draft report for independent musical communication evaluation.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "evaluation_id", "transmission_id", "independence", "configuration", "runs", "verdict", "limitations"],
+  "properties": {
+    "schema": { "const": "IES-C000" },
+    "evaluation_id": { "type": "string", "minLength": 1 },
+    "transmission_id": { "type": "string", "pattern": "^T[0-9]{3,}$" },
+    "independence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["evaluator_id", "evaluator_version", "candidate_authored_verdict", "rationale"],
+      "properties": {
+        "evaluator_id": { "type": "string", "minLength": 1 },
+        "evaluator_version": { "type": "string", "minLength": 1 },
+        "candidate_authored_verdict": { "const": false },
+        "rationale": { "type": "string", "minLength": 1 }
+      }
+    },
+    "configuration": {
+      "type": "object",
+      "required": ["receiver", "context_provided", "ground_truth_ref", "metrics_preregistered"],
+      "properties": {
+        "receiver": { "type": "object" },
+        "context_provided": { "type": "array", "items": { "type": "string" } },
+        "ground_truth_ref": { "type": "string", "format": "uri-reference" },
+        "metrics_preregistered": { "type": "boolean" },
+        "tolerances": { "type": "object" }
+      },
+      "additionalProperties": true
+    },
+    "runs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["run_id", "raw_response_ref", "metrics"],
+        "properties": {
+          "run_id": { "type": "string", "minLength": 1 },
+          "raw_response_ref": { "type": "string", "format": "uri-reference" },
+          "metrics": {
+            "type": "object",
+            "properties": {
+              "event_precision": { "$ref": "#/$defs/unitInterval" },
+              "event_recall": { "$ref": "#/$defs/unitInterval" },
+              "event_f1": { "$ref": "#/$defs/unitInterval" },
+              "pitch_accuracy": { "$ref": "#/$defs/unitInterval" },
+              "onset_mae_ticks": { "type": "number", "minimum": 0 },
+              "duration_mae_ticks": { "type": "number", "minimum": 0 },
+              "velocity_mae": { "type": "number", "minimum": 0 },
+              "overlap_recovery": { "$ref": "#/$defs/unitInterval" },
+              "protocol_recovered": { "type": "boolean" }
+            },
+            "additionalProperties": true
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "verdict": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "summary"],
+      "properties": {
+        "status": { "enum": ["pass", "fail", "inconclusive", "exploratory"] },
+        "summary": { "type": "string", "minLength": 1 }
+      }
+    },
+    "limitations": { "type": "array", "items": { "type": "string", "minLength": 1 } }
+  },
+  "$defs": {
+    "unitInterval": { "type": "number", "minimum": 0, "maximum": 1 }
+  }
+}

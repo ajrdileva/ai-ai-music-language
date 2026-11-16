@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ajrdileva/ai-ai-music-language/blob/main/schemas/mrm-000.schema.json",
+  "title": "Musical Reference Model MRM-000",
+  "description": "Draft reference model for independently timed note events. Validation does not imply musical or experimental validity.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "id", "timebase", "tempo", "events", "provenance"],
+  "properties": {
+    "schema": { "const": "MRM-000" },
+    "id": { "$ref": "#/$defs/stableId" },
+    "timebase": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["ticks_per_quarter"],
+      "properties": {
+        "ticks_per_quarter": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "tempo": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/tempoEvent" }
+    },
+    "events": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/noteEvent" }
+    },
+    "groups": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/group" },
+      "default": []
+    },
+    "provenance": { "$ref": "#/$defs/provenance" },
+    "extensions": {
+      "type": "object",
+      "description": "Namespaced experimental fields. Consumers may ignore unknown extensions.",
+      "propertyNames": { "pattern": "^[a-z0-9][a-z0-9._-]*$" },
+      "additionalProperties": true
+    }
+  },
+  "$defs": {
+    "stableId": {
+      "type": "string",
+      "pattern": "^[A-Za-z][A-Za-z0-9._:-]{0,127}$"
+    },
+    "tempoEvent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["at_tick", "microseconds_per_quarter"],
+      "properties": {
+        "at_tick": { "type": "integer", "minimum": 0 },
+        "microseconds_per_quarter": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "noteEvent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "type", "pitch", "onset_tick", "duration_tick", "velocity"],
+      "properties": {
+        "id": { "$ref": "#/$defs/stableId" },
+        "type": { "const": "note" },
+        "pitch": { "type": "integer", "minimum": 0, "maximum": 127 },
+        "onset_tick": { "type": "integer", "minimum": 0 },
+        "duration_tick": { "type": "integer", "minimum": 1 },
+        "velocity": { "type": "integer", "minimum": 0, "maximum": 127 },
+        "channel": { "type": "integer", "minimum": 0, "maximum": 15 },
+        "source_ref": { "type": "string", "minLength": 1 }
+      }
+    },
+    "group": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "type", "members"],
+      "properties": {
+        "id": { "$ref": "#/$defs/stableId" },
+        "type": { "type": "string", "minLength": 1 },
+        "members": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/stableId" }
+        },
+        "interpretation": {
+          "type": "object",
+          "description": "Optional declared semantics; group membership alone has none.",
+          "required": ["claim_ref"],
+          "properties": {
+            "claim_ref": { "$ref": "#/$defs/stableId" }
+          },
+          "additionalProperties": true
+        }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_type", "source_id", "transformations"],
+      "properties": {
+        "source_type": { "enum": ["midi", "structured-events", "generated", "alternative-ontology", "other"] },
+        "source_id": { "type": "string", "minLength": 1 },
+        "source_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "transformations": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "losses": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "default": []
+        }
+      }
+    }
+  }
+}

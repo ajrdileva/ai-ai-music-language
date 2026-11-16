@@ -1,0 +1,114 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ajrdileva/ai-ai-music-language/blob/main/schemas/cp-000.schema.json",
+  "title": "Communication Protocol CP-000",
+  "description": "Draft machine-readable description of a candidate musical communication protocol.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "protocol", "maturity", "target_model", "framing", "channels", "bootstrap", "response", "limitations"],
+  "properties": {
+    "schema": { "const": "CP-000" },
+    "protocol": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "version", "name"],
+      "properties": {
+        "id": { "$ref": "#/$defs/stableId" },
+        "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+(?:\\.[0-9]+)?(?:[-+][A-Za-z0-9.-]+)?$" },
+        "name": { "type": "string", "minLength": 1 }
+      }
+    },
+    "maturity": { "enum": ["draft", "candidate", "validated", "deprecated"] },
+    "target_model": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "relationship"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "relationship": { "enum": ["lossless", "lossy", "evaluation-projection", "independent"] },
+        "losses": { "type": "array", "items": { "type": "string", "minLength": 1 } }
+      }
+    },
+    "framing": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["unit", "ordering", "termination"],
+      "properties": {
+        "unit": { "type": "string", "minLength": 1 },
+        "ordering": { "type": "string", "minLength": 1 },
+        "termination": { "type": "string", "minLength": 1 },
+        "synchronization": { "type": "string", "minLength": 1 }
+      }
+    },
+    "channels": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "medium", "required", "semantics"],
+        "properties": {
+          "id": { "$ref": "#/$defs/stableId" },
+          "medium": { "enum": ["json", "text", "audio", "visual", "video", "image", "other"] },
+          "required": { "type": "boolean" },
+          "semantics": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "symbols": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["symbol", "meaning"],
+        "properties": {
+          "symbol": { "type": "string", "minLength": 1 },
+          "meaning": { "type": "string", "minLength": 1 },
+          "examples": { "type": "array" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "bootstrap": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["self_identification", "human_notice_separate", "entry_points"],
+      "properties": {
+        "self_identification": { "type": "string", "minLength": 1 },
+        "human_notice_separate": { "const": true },
+        "entry_points": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "format": "uri-reference" }
+        }
+      }
+    },
+    "response": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_ref", "submission_instructions"],
+      "properties": {
+        "schema_ref": { "type": "string", "format": "uri-reference" },
+        "submission_instructions": { "type": "string", "minLength": 1 }
+      }
+    },
+    "integrity": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["path", "sha256"],
+        "properties": {
+          "path": { "type": "string", "minLength": 1 },
+          "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "limitations": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    }
+  },
+  "$defs": {
+    "stableId": { "type": "string", "pattern": "^[A-Za-z][A-Za-z0-9._:-]{0,127}$" }
+  }
+}

@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Local secrets and environment
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Local/rendered artifacts (publish deliberately with manifests)
+build/
+dist/
+artifacts/
+*.wav
+*.mp3
+*.mp4
+
+# Editors and operating systems
+.DS_Store
+.idea/
+.vscode/

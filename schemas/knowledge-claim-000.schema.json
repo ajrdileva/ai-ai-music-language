@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ajrdileva/ai-ai-music-language/blob/main/schemas/knowledge-claim-000.schema.json",
+  "title": "Musical Knowledge Claim 000",
+  "description": "Draft epistemic claim record with append-only status history.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "claim_id", "claim", "scope", "current_state", "provenance", "evidence", "counterexamples", "dependencies", "relations", "history"],
+  "properties": {
+    "schema": { "const": "KNOWLEDGE-CLAIM-000" },
+    "claim_id": { "type": "string", "minLength": 1 },
+    "claim": { "type": "string", "minLength": 1 },
+    "scope": { "type": "string", "minLength": 1 },
+    "current_state": { "$ref": "#/$defs/state" },
+    "provenance": {
+      "type": "object",
+      "required": ["author", "created_at", "source_refs"],
+      "properties": {
+        "author": { "type": "string", "minLength": 1 },
+        "created_at": { "type": "string", "format": "date-time" },
+        "source_refs": { "type": "array", "items": { "type": "string", "format": "uri-reference" } }
+      },
+      "additionalProperties": true
+    },
+    "evidence": { "$ref": "#/$defs/references" },
+    "counterexamples": { "$ref": "#/$defs/references" },
+    "dependencies": { "$ref": "#/$defs/references" },
+    "relations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["type", "target"],
+        "properties": {
+          "type": { "enum": ["derived-from", "transforms", "supports", "contradicts", "generalizes", "depends-on", "supersedes"] },
+          "target": { "type": "string", "minLength": 1 }
+        },
+        "additionalProperties": false
+      }
+    },
+    "history": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["at", "state", "actor", "rationale", "evidence_refs"],
+        "properties": {
+          "at": { "type": "string", "format": "date-time" },
+          "state": { "$ref": "#/$defs/state" },
+          "actor": { "type": "string", "minLength": 1 },
+          "rationale": { "type": "string", "minLength": 1 },
+          "evidence_refs": { "$ref": "#/$defs/references" }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "$defs": {
+    "state": { "enum": ["E", "W", "H", "?"] },
+    "references": {
+      "type": "array",
+      "items": { "type": "string", "format": "uri-reference" }
+    }
+  }
+}
