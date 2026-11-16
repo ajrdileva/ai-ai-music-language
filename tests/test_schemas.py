@@ -30,6 +30,16 @@ class SchemaTests(unittest.TestCase):
         instance = json.loads((ROOT / "protocols/cp-000-baseline.json").read_text())
         Draft202012Validator(schema).validate(instance)
 
+    def test_t000_ground_truth_commitment(self) -> None:
+        schema = json.loads((ROOT / "schemas/ground-truth-commitment-000.schema.json").read_text())
+        instance = json.loads((ROOT / "transmissions/T000/ground-truth-commitment.json").read_text())
+        Draft202012Validator(schema, format_checker=Draft202012Validator.FORMAT_CHECKER).validate(instance)
+
+    def test_t000_receiver_package(self) -> None:
+        schema = json.loads((ROOT / "schemas/receiver-package-000.schema.json").read_text())
+        instance = json.loads((ROOT / "transmissions/T000/receiver-package.json").read_text())
+        Draft202012Validator(schema, format_checker=Draft202012Validator.FORMAT_CHECKER).validate(instance)
+
 
 if __name__ == "__main__":
     unittest.main()

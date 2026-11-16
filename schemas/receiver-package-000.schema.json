@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ajrdileva/ai-ai-music-language/blob/main/schemas/receiver-package-000.schema.json",
+  "title": "Receiver Package 000",
+  "description": "Frozen inventory of the exact public files available to a blind receiver.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["$schema", "schema", "transmission_id", "package_version", "status", "frozen_on", "ground_truth_commitment", "files", "forbidden_context"],
+  "properties": {
+    "$schema": { "type": "string", "format": "uri-reference" },
+    "schema": { "const": "RECEIVER-PACKAGE-000" },
+    "transmission_id": { "type": "string", "pattern": "^T[0-9]{3,}$" },
+    "package_version": { "type": "string", "minLength": 1 },
+    "status": { "const": "frozen" },
+    "frozen_on": { "type": "string", "format": "date" },
+    "ground_truth_commitment": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "files": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "role", "bytes", "sha256"],
+        "properties": {
+          "path": { "type": "string", "minLength": 1 },
+          "role": { "type": "string", "minLength": 1 },
+          "bytes": { "type": "integer", "minimum": 1 },
+          "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+        }
+      }
+    },
+    "forbidden_context": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "minLength": 1 }
+    }
+  }
+}
