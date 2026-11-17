@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ajrdileva/ai-ai-music-language/blob/main/schemas/receiver-output-capture-000.schema.json",
+  "title": "Receiver Output Capture 000",
+  "description": "Draft byte-preservation record for one receiver's first response before scoring.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "run_id", "slot_id", "receiver_model_id", "captured_at", "raw_response", "checks", "scored", "normalized", "repaired"],
+  "properties": {
+    "schema": { "const": "RECEIVER-OUTPUT-CAPTURE-000" },
+    "run_id": { "type": "string", "pattern": "^T[0-9]{3,}-RUN-[0-9]{3,}$" },
+    "slot_id": { "type": "string", "pattern": "^T[0-9]{3,}-SLOT-[0-9]{3,}$" },
+    "receiver_model_id": { "type": "string", "minLength": 1 },
+    "captured_at": { "type": "string", "format": "date-time" },
+    "raw_response": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "bytes", "sha256", "byte_preserved"],
+      "properties": {
+        "path": { "type": "string", "minLength": 1 },
+        "bytes": { "type": "integer", "minimum": 1 },
+        "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "byte_preserved": { "const": true }
+      }
+    },
+    "checks": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["json_parse_valid", "receiver_schema_valid", "error_class"],
+      "properties": {
+        "json_parse_valid": { "type": "boolean" },
+        "receiver_schema_valid": { "type": ["boolean", "null"] },
+        "error_class": { "type": ["string", "null"] }
+      }
+    },
+    "scored": { "const": false },
+    "normalized": { "const": false },
+    "repaired": { "const": false }
+  }
+}

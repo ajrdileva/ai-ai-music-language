@@ -77,6 +77,44 @@
       "source_sha256": "32753eea01dcd00221f558c9f6e44ad8ec225e79e8d303bbf39d314bd39eb965"
     }
   },
+  "execution_lock": {
+    "locked_on": "2026-11-17",
+    "locked_before_first_run": true,
+    "no_new_results_observed": true,
+    "roster_ref": "roster.json",
+    "files": [
+      {
+        "path": "replications/T000/batch-001/roster.json",
+        "sha256": "a2f4dc339e0697792324841f4deb74627ee058249e02aef1dae3b0406728d645",
+        "role": "receiver-roster"
+      },
+      {
+        "path": "schemas/receiver-roster-000.schema.json",
+        "sha256": "9dcefa045a264efc8ab0454490016b7cbe2abc57742722ae73c4d82c63137956",
+        "role": "roster-schema"
+      },
+      {
+        "path": "replications/T000/batch-001/PREFLIGHT.md",
+        "sha256": "a631c9759ca2af600009c5805596ac785a28191d0a84524dda7e19bf81f7ba52",
+        "role": "preflight-procedure"
+      },
+      {
+        "path": "replications/T000/batch-001/MEDIA-ADAPTER.md",
+        "sha256": "1eaf368e0ad14e4959189eaa51869d1b889b616ca6a56b633f715c032f308e4a",
+        "role": "media-adapter-specification"
+      },
+      {
+        "path": "tools/prepare_receiver_media.py",
+        "sha256": "67d0d019d7e46fc648284fce2c68bd5a0637007cb31f37316b09cd590cf021e1",
+        "role": "media-adapter-implementation"
+      },
+      {
+        "path": "tools/capture_receiver_output.py",
+        "sha256": "71ce8cf3236c42e3aa39ab307f4ecfdbb3adf5f22a5d4e573e1b60ffe3d9d2fd",
+        "role": "output-capture-implementation"
+      }
+    ]
+  },
   "sampling": {
     "target_eligible_runs": 8,
     "minimum_distinct_model_families": 4,
@@ -125,7 +163,7 @@
     "Replace excluded or aborted attempts with later run IDs; preserve every attempted run and exclusion reason.",
     "A schema-invalid or incorrect first receiver answer is an eligible failure, not an exclusion.",
     "Exclude a run if the receiver had ground-truth, prior-answer, inherited-project, or undeclared external context.",
-    "Do not change the candidate, prompt, evaluator, thresholds, or eligibility rules after the first new run begins.",
+    "Do not change the candidate, prompt, evaluator, thresholds, eligibility rules, roster selection, or media adapter after the first new run begins.",
     "Any post-start change creates a separately versioned exploratory batch rather than modifying this confirmatory batch."
   ],
   "epistemic_interpretation": {

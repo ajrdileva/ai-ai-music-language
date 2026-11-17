@@ -14,6 +14,7 @@
     "research_question",
     "prior_evidence",
     "candidate_lock",
+    "execution_lock",
     "sampling",
     "context_control",
     "per_run_gate",
@@ -62,6 +63,22 @@
             "source": { "type": "string", "format": "uri-reference" },
             "source_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
           }
+        }
+      }
+    },
+    "execution_lock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["locked_on", "locked_before_first_run", "no_new_results_observed", "roster_ref", "files"],
+      "properties": {
+        "locked_on": { "type": "string", "format": "date" },
+        "locked_before_first_run": { "const": true },
+        "no_new_results_observed": { "const": true },
+        "roster_ref": { "type": "string", "format": "uri-reference" },
+        "files": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/executionFile" }
         }
       }
     },
@@ -187,6 +204,25 @@
         "path": { "type": "string", "minLength": 1 },
         "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
         "receiver_access": { "enum": ["provided", "forbidden", "evaluator-only"] }
+      }
+    },
+    "executionFile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256", "role"],
+      "properties": {
+        "path": { "type": "string", "minLength": 1 },
+        "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "role": {
+          "enum": [
+            "receiver-roster",
+            "roster-schema",
+            "preflight-procedure",
+            "media-adapter-specification",
+            "media-adapter-implementation",
+            "output-capture-implementation"
+          ]
+        }
       }
     }
   }

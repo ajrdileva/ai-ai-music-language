@@ -5,11 +5,13 @@ Do not improvise assistance to improve an answer.
 
 ## 1. Allocate the attempt
 
-1. Assign the next sequential run ID, beginning with `T000-RUN-002`.
-2. Copy `run-metadata.template.json` into the attempt directory.
-3. Declare provider, model family, model/version, interface, modalities,
+1. Select the next unresolved slot from `roster.json` without reference to any
+   earlier result.
+2. Assign its planned run ID or the next replacement ID after an exclusion.
+3. Copy `run-metadata.template.json` into the attempt directory.
+4. Declare provider, model family, exact model/build, interface, modalities,
    settings, operator ID, and planned isolation before presenting T000.
-4. Confirm that including the attempt would not exceed two eligible runs from
+5. Confirm that including the attempt would not exceed two eligible runs from
    the same family.
 
 Use a pseudonymous operator ID.
@@ -17,16 +19,21 @@ Do not record personal data, credentials, session tokens, or account details.
 
 ## 2. Verify and isolate materials
 
-1. Check every provided file against `batch-plan.json` and
+1. Complete `PREFLIGHT.md` without presenting T000 to a receiver.
+2. Check every provided file against `batch-plan.json` and
    `receiver-package.json`.
-2. Place only the allowed files in the receiver-visible workspace.
-3. Start a new conversation or process with no inherited project context.
-4. Disable browsing, network, repository, unrelated filesystem, memory, and
+3. Place only the allowed files in the receiver-visible workspace.
+4. For an RMA-000 slot, generate the views once, verify its manifest, and use
+   the identical output for every local slot.
+5. Start a new conversation or process with no inherited project context.
+6. Disable browsing, network, repository, unrelated filesystem, memory, and
    external tools where the interface permits.
-5. Record whether isolation was technical, procedural, or unknown.
+7. Record whether isolation was technical, procedural, or unknown.
 
 Technical isolation means the receiver cannot access anything beyond the
 supplied package through network, repository, filesystem, memory, or tools.
+API transport may be recorded as `transport-only` when the model has no
+network-facing tool, grounding, URL retrieval, or other external source.
 Procedural isolation means such access existed but was not used and the
 receiver was instructed not to use it.
 
@@ -47,7 +54,8 @@ that first answer and treat the otherwise compliant run as an eligible failure.
 
 ## 4. Freeze the output
 
-1. Save the exact first response before editing or normalization.
+1. Save the exact first response before editing or normalization; the frozen
+   capture tool may be used for byte preservation and overwrite protection.
 2. Compute and record its SHA-256 hash.
 3. Preserve any platform transcript needed to demonstrate the supplied prompt
    and files, without publishing credentials or personal data.

@@ -1,6 +1,7 @@
 {
   "schema": "RECEIVER-RUN-METADATA-000",
   "run_id": "T000-RUN-002",
+  "slot_id": "T000-SLOT-001",
   "batch_id": "T000-REPLICATION-BATCH-001",
   "transmission_id": "T000",
   "status": "planned",

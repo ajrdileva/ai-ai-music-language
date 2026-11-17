@@ -52,6 +52,22 @@ Attempts receive sequential IDs beginning with `T000-RUN-002`.
 Excluded and aborted attempts retain their IDs and records and are replaced by
 later IDs until the eligible target is met.
 
+### Pre-run execution lock
+
+Before Run 002 and before observing any new result, the project froze
+[`roster.json`](roster.json): two slots each for OpenAI-GPT, Gemini,
+Qwen2.5-VL, and Llama-3.2-Vision.
+The declared primary/fallback selection rule resolves cloud availability only
+during transport preflight and cannot respond to experimental outcomes.
+
+Six slots are designated for technical isolation.
+Local image-capable receivers use the frozen neutral
+[RMA-000 media adapter](MEDIA-ADAPTER.md), which decodes uniform video frames,
+a waveform, and a spectrogram without OCR, pitch detection, segmentation, or
+musical interpretation.
+The roster and adapter are execution controls; they do not change CP-000, the
+T000 candidate, the receiver prompt, the evaluator, or any success threshold.
+
 ## Identical-context rule
 
 Every receiver receives the exact files marked `provided` in the batch plan and
@@ -109,6 +125,8 @@ Every attempted run must preserve a metadata record and exclusion or abortion
 reason.
 Any change to the candidate, evaluator, thresholds, or eligibility rules after
 the first new attempt starts creates a separately versioned exploratory batch.
+Any roster, model-selection, or media-adapter change after that point also
+requires a new version and cannot enter Batch 001.
 
 ## Reporting
 

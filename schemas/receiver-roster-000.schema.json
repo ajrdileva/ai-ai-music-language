@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ajrdileva/ai-ai-music-language/blob/main/schemas/receiver-roster-000.schema.json",
+  "title": "Receiver Roster 000",
+  "description": "Draft pre-run lock for receiver-family allocation, model selection, and execution controls.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "batch_id",
+    "status",
+    "locked_on",
+    "locked_before_first_run",
+    "no_new_results_observed",
+    "selection_policy",
+    "slots",
+    "balance"
+  ],
+  "properties": {
+    "schema": { "const": "RECEIVER-ROSTER-000" },
+    "batch_id": { "type": "string", "pattern": "^T[0-9]{3,}-REPLICATION-BATCH-[0-9]{3,}$" },
+    "status": { "const": "locked" },
+    "locked_on": { "type": "string", "format": "date" },
+    "locked_before_first_run": { "const": true },
+    "no_new_results_observed": { "const": true },
+    "selection_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["cloud_alias_resolution", "fallback_timing", "model_drift", "failed_preflight"],
+      "properties": {
+        "cloud_alias_resolution": { "type": "string", "minLength": 1 },
+        "fallback_timing": { "type": "string", "minLength": 1 },
+        "model_drift": { "type": "string", "minLength": 1 },
+        "failed_preflight": { "type": "string", "minLength": 1 }
+      }
+    },
+    "slots": {
+      "type": "array",
+      "minItems": 8,
+      "maxItems": 8,
+      "items": { "$ref": "#/$defs/slot" }
+    },
+    "balance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["planned_slots", "declared_families", "slots_per_family", "technically_isolated_slots"],
+      "properties": {
+        "planned_slots": { "const": 8 },
+        "declared_families": { "const": 4 },
+        "slots_per_family": { "const": 2 },
+        "technically_isolated_slots": { "type": "integer", "minimum": 4, "maximum": 8 }
+      }
+    }
+  },
+  "$defs": {
+    "slot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "slot_id",
+        "planned_run_id",
+        "provider",
+        "model_family",
+        "interface",
+        "isolation_level",
+        "media_delivery",
+        "primary",
+        "settings",
+        "preflight_status"
+      ],
+      "properties": {
+        "slot_id": { "type": "string", "pattern": "^T[0-9]{3,}-SLOT-[0-9]{3,}$" },
+        "planned_run_id": { "type": "string", "pattern": "^T[0-9]{3,}-RUN-[0-9]{3,}$" },
+        "provider": { "type": "string", "minLength": 1 },
+        "model_family": { "type": "string", "minLength": 1 },
+        "interface": { "enum": ["chat-web", "api", "local"] },
+        "isolation_level": { "enum": ["technical", "procedural"] },
+        "media_delivery": { "enum": ["native-package", "RMA-000"] },
+        "primary": { "$ref": "#/$defs/modelSelection" },
+        "fallback": { "$ref": "#/$defs/modelSelection" },
+        "fallback_rule": { "type": "string", "minLength": 1 },
+        "settings": { "type": "object", "additionalProperties": true },
+        "preflight_status": { "enum": ["pending", "passed", "failed"] }
+      }
+    },
+    "modelSelection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["model_id", "variant", "source"],
+      "properties": {
+        "model_id": { "type": "string", "minLength": 1 },
+        "variant": { "type": "string", "minLength": 1 },
+        "source": { "type": "string", "format": "uri-reference" },
+        "immutable_digest": { "type": "string", "pattern": "^[a-f0-9]{12,64}$" }
+      }
+    }
+  }
+}
