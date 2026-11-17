@@ -27,10 +27,13 @@
     "knowledge_evaluation": "schemas/ies-k000.schema.json",
     "knowledge_claim": "schemas/knowledge-claim-000.schema.json",
     "receiver_response": "schemas/receiver-response-000.schema.json",
+    "receiver_media_adapter_manifest": "schemas/receiver-media-adapter-manifest-000.schema.json",
+    "receiver_output_capture": "schemas/receiver-output-capture-000.schema.json",
     "ground_truth_commitment": "schemas/ground-truth-commitment-000.schema.json",
     "receiver_package": "schemas/receiver-package-000.schema.json",
     "publication_record": "schemas/publication-record-000.schema.json",
     "receiver_run_metadata": "schemas/receiver-run-metadata-000.schema.json",
+    "receiver_roster": "schemas/receiver-roster-000.schema.json",
     "replication_batch_plan": "schemas/replication-batch-plan-000.schema.json",
     "replication_batch_report": "schemas/replication-batch-report-000.schema.json"
   },
@@ -38,7 +41,8 @@
     "T000-YOUTUBE-001": "transmissions/T000/publications/youtube.json"
   },
   "replications": {
-    "T000-REPLICATION-BATCH-001": "replications/T000/batch-001/batch-plan.json"
+    "T000-REPLICATION-BATCH-001": "replications/T000/batch-001/batch-plan.json",
+    "T000-REPLICATION-BATCH-001-ROSTER": "replications/T000/batch-001/roster.json"
   },
   "epistemic_states": {
     "E": "established under stated experimental conditions",

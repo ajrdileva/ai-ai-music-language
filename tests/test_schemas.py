@@ -51,6 +51,24 @@ class SchemaTests(unittest.TestCase):
         instance = json.loads((ROOT / "replications/T000/batch-001/batch-plan.json").read_text())
         Draft202012Validator(schema, format_checker=Draft202012Validator.FORMAT_CHECKER).validate(instance)
 
+    def test_t000_receiver_roster(self) -> None:
+        schema = json.loads((ROOT / "schemas/receiver-roster-000.schema.json").read_text())
+        roster = json.loads((ROOT / "replications/T000/batch-001/roster.json").read_text())
+        Draft202012Validator(schema, format_checker=Draft202012Validator.FORMAT_CHECKER).validate(roster)
+
+        slots = roster["slots"]
+        self.assertEqual(len({slot["slot_id"] for slot in slots}), 8)
+        self.assertEqual(len({slot["planned_run_id"] for slot in slots}), 8)
+        family_counts: dict[str, int] = {}
+        for slot in slots:
+            family_counts[slot["model_family"]] = family_counts.get(slot["model_family"], 0) + 1
+        self.assertEqual(len(family_counts), 4)
+        self.assertTrue(all(count == 2 for count in family_counts.values()))
+        self.assertGreaterEqual(
+            sum(slot["isolation_level"] == "technical" for slot in slots),
+            4,
+        )
+
     def test_t000_replication_templates(self) -> None:
         run_schema = json.loads((ROOT / "schemas/receiver-run-metadata-000.schema.json").read_text())
         run_template = json.loads((ROOT / "replications/T000/batch-001/run-metadata.template.json").read_text())
@@ -72,6 +90,11 @@ class SchemaTests(unittest.TestCase):
         evaluator = plan["candidate_lock"]["evaluator"]
         evaluator_content = (ROOT / evaluator["source"]).read_bytes()
         self.assertEqual(hashlib.sha256(evaluator_content).hexdigest(), evaluator["source_sha256"])
+
+        for record in plan["execution_lock"]["files"]:
+            with self.subTest(execution_path=record["path"]):
+                content = (ROOT / record["path"]).read_bytes()
+                self.assertEqual(hashlib.sha256(content).hexdigest(), record["sha256"])
 
 
 if __name__ == "__main__":

@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ajrdileva/ai-ai-music-language/blob/main/schemas/receiver-media-adapter-manifest-000.schema.json",
+  "title": "Receiver Media Adapter Manifest 000",
+  "description": "Draft record of neutral derived media views created for a receiver interface.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "adapter_version", "derived_not_candidate", "sources", "parameters", "tool", "commands", "outputs", "forbidden_operations"],
+  "properties": {
+    "schema": { "const": "RMA-000" },
+    "adapter_version": { "type": "string", "minLength": 1 },
+    "derived_not_candidate": { "const": true },
+    "sources": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["role", "path", "sha256"],
+        "properties": {
+          "role": { "enum": ["video", "audio"] },
+          "path": { "type": "string", "minLength": 1 },
+          "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+        }
+      }
+    },
+    "parameters": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["frame_rate", "expected_frame_count", "waveform_size", "spectrogram_size", "spectrogram_frequency_scale"],
+      "properties": {
+        "frame_rate": { "type": "integer", "minimum": 1 },
+        "expected_frame_count": { "type": "integer", "minimum": 1 },
+        "waveform_size": { "$ref": "#/$defs/size" },
+        "spectrogram_size": { "$ref": "#/$defs/size" },
+        "spectrogram_frequency_scale": { "enum": ["linear", "logarithmic"] }
+      }
+    },
+    "tool": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["ffmpeg"],
+      "properties": { "ffmpeg": { "type": "string", "minLength": 1 } }
+    },
+    "commands": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "array",
+        "minItems": 1,
+        "items": { "type": "string" }
+      }
+    },
+    "outputs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "bytes", "sha256"],
+        "properties": {
+          "path": { "type": "string", "minLength": 1 },
+          "bytes": { "type": "integer", "minimum": 1 },
+          "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+          "timestamp_seconds": { "type": "number", "minimum": 0 }
+        }
+      }
+    },
+    "forbidden_operations": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "minLength": 1 }
+    }
+  },
+  "$defs": {
+    "size": {
+      "type": "array",
+      "prefixItems": [
+        { "type": "integer", "minimum": 1 },
+        { "type": "integer", "minimum": 1 }
+      ],
+      "minItems": 2,
+      "maxItems": 2
+    }
+  }
+}

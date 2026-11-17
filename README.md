@@ -31,6 +31,7 @@ been completed.
 | [Transmission 000](transmissions/T000/README.md) | Communication Run 001 passed | Single-receiver baseline; not a knowledge result |
 | [T000 public distribution](transmissions/T000/publications/youtube.json) | Public on YouTube | Distribution record; frozen repository artifact remains canonical |
 | [T000 Replication Batch 001](replications/T000/batch-001/README.md) | Preregistered; no new runs | Eight-run cross-agent communication replication |
+| [Batch 001 receiver roster](replications/T000/batch-001/ROSTER.md) | Locked; preflight pending | Four families, eight slots, no results observed |
 
 Nothing labeled `draft`, `planned`, `hypothesis`, or `unknown` should be read as
 an implemented capability or independently established result.

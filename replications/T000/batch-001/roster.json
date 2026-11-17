@@ -1,0 +1,242 @@
+{
+  "schema": "RECEIVER-ROSTER-000",
+  "batch_id": "T000-REPLICATION-BATCH-001",
+  "status": "locked",
+  "locked_on": "2026-11-17",
+  "locked_before_first_run": true,
+  "no_new_results_observed": true,
+  "selection_policy": {
+    "cloud_alias_resolution": "Record the service-disclosed model or build identifier during preflight before T000 is presented.",
+    "fallback_timing": "Use a declared fallback only when the primary is unavailable during preflight and before any Batch 001 receiver answer exists.",
+    "model_drift": "If neither declared selection is available, stop the slot and version a replacement roster before continuing.",
+    "failed_preflight": "A transport-only preflight is not an attempt; once the T000 prompt or media is presented to a receiver, allocate and preserve an attempt ID."
+  },
+  "slots": [
+    {
+      "slot_id": "T000-SLOT-001",
+      "planned_run_id": "T000-RUN-002",
+      "provider": "OpenAI",
+      "model_family": "OpenAI-GPT",
+      "interface": "chat-web",
+      "isolation_level": "procedural",
+      "media_delivery": "native-package",
+      "primary": {
+        "model_id": "gpt-6",
+        "variant": "GPT-6 Sol / Instant",
+        "source": "https://help.openai.com/en/articles/20001354-gpt-6-and-other-models-in-chatgpt"
+      },
+      "fallback": {
+        "model_id": "gpt-5.6-sol",
+        "variant": "GPT-5.6 Sol / Instant",
+        "source": "https://help.openai.com/en/articles/20001354-gpt-6-and-other-models-in-chatgpt"
+      },
+      "fallback_rule": "Use the fallback only if GPT-6 is absent from the paid personal account during preflight.",
+      "settings": {
+        "temporary_chat": "unpersonalized",
+        "thinking_level": "instant",
+        "automatic_switching": false,
+        "search": false,
+        "connectors": false,
+        "custom_instructions": false,
+        "follow_up": false
+      },
+      "preflight_status": "pending"
+    },
+    {
+      "slot_id": "T000-SLOT-002",
+      "planned_run_id": "T000-RUN-003",
+      "provider": "OpenAI",
+      "model_family": "OpenAI-GPT",
+      "interface": "chat-web",
+      "isolation_level": "procedural",
+      "media_delivery": "native-package",
+      "primary": {
+        "model_id": "gpt-6",
+        "variant": "GPT-6 Sol / High",
+        "source": "https://help.openai.com/en/articles/20001354-gpt-6-and-other-models-in-chatgpt"
+      },
+      "fallback": {
+        "model_id": "gpt-5.6-sol",
+        "variant": "GPT-5.6 Sol / High",
+        "source": "https://help.openai.com/en/articles/20001354-gpt-6-and-other-models-in-chatgpt"
+      },
+      "fallback_rule": "Use the fallback only if GPT-6 is absent from the paid personal account during preflight.",
+      "settings": {
+        "temporary_chat": "unpersonalized",
+        "thinking_level": "high",
+        "automatic_switching": false,
+        "search": false,
+        "connectors": false,
+        "custom_instructions": false,
+        "follow_up": false
+      },
+      "preflight_status": "pending"
+    },
+    {
+      "slot_id": "T000-SLOT-003",
+      "planned_run_id": "T000-RUN-004",
+      "provider": "Google",
+      "model_family": "Gemini",
+      "interface": "api",
+      "isolation_level": "technical",
+      "media_delivery": "native-package",
+      "primary": {
+        "model_id": "gemini-3.8-flash",
+        "variant": "stable",
+        "source": "https://ai.google.dev/gemini-api/docs/models"
+      },
+      "fallback": {
+        "model_id": "gemini-3-flash-preview",
+        "variant": "preview",
+        "source": "https://ai.google.dev/gemini-api/docs/pricing"
+      },
+      "fallback_rule": "Use the fallback only if the primary has no free-tier multimodal access during preflight.",
+      "settings": {
+        "temperature": 0.0,
+        "top_p": 1.0,
+        "max_output_tokens": 8192,
+        "tools": [],
+        "grounding": false,
+        "system_instruction": null,
+        "follow_up": false
+      },
+      "preflight_status": "pending"
+    },
+    {
+      "slot_id": "T000-SLOT-004",
+      "planned_run_id": "T000-RUN-005",
+      "provider": "Google",
+      "model_family": "Gemini",
+      "interface": "api",
+      "isolation_level": "technical",
+      "media_delivery": "native-package",
+      "primary": {
+        "model_id": "gemini-3.7-flash",
+        "variant": "stable",
+        "source": "https://ai.google.dev/gemini-api/docs/models"
+      },
+      "fallback": {
+        "model_id": "gemini-3-flash-preview",
+        "variant": "preview",
+        "source": "https://ai.google.dev/gemini-api/docs/pricing"
+      },
+      "fallback_rule": "Use the fallback only if the primary has no free-tier multimodal access during preflight; do not use the same fallback for both Gemini slots.",
+      "settings": {
+        "temperature": 0.0,
+        "top_p": 1.0,
+        "max_output_tokens": 8192,
+        "tools": [],
+        "grounding": false,
+        "system_instruction": null,
+        "follow_up": false
+      },
+      "preflight_status": "pending"
+    },
+    {
+      "slot_id": "T000-SLOT-005",
+      "planned_run_id": "T000-RUN-006",
+      "provider": "Alibaba Cloud / Ollama distribution",
+      "model_family": "Qwen2.5-VL",
+      "interface": "local",
+      "isolation_level": "technical",
+      "media_delivery": "RMA-000",
+      "primary": {
+        "model_id": "qwen2.5vl:3b-q4_K_M",
+        "variant": "3B Instruct Q4_K_M",
+        "source": "https://ollama.com/library/qwen2.5vl/tags",
+        "immutable_digest": "fb90415cde1e"
+      },
+      "settings": {
+        "temperature": 0.0,
+        "seed": 6006,
+        "num_ctx": 32768,
+        "num_predict": 8192,
+        "network": false,
+        "tools": [],
+        "follow_up": false
+      },
+      "preflight_status": "pending"
+    },
+    {
+      "slot_id": "T000-SLOT-006",
+      "planned_run_id": "T000-RUN-007",
+      "provider": "Alibaba Cloud / Ollama distribution",
+      "model_family": "Qwen2.5-VL",
+      "interface": "local",
+      "isolation_level": "technical",
+      "media_delivery": "RMA-000",
+      "primary": {
+        "model_id": "qwen2.5vl:7b-q4_K_M",
+        "variant": "7B Instruct Q4_K_M",
+        "source": "https://ollama.com/library/qwen2.5vl/tags",
+        "immutable_digest": "5ced39dfa4ba"
+      },
+      "settings": {
+        "temperature": 0.0,
+        "seed": 6007,
+        "num_ctx": 32768,
+        "num_predict": 8192,
+        "network": false,
+        "tools": [],
+        "follow_up": false
+      },
+      "preflight_status": "pending"
+    },
+    {
+      "slot_id": "T000-SLOT-007",
+      "planned_run_id": "T000-RUN-008",
+      "provider": "Meta / Ollama distribution",
+      "model_family": "Llama-3.2-Vision",
+      "interface": "local",
+      "isolation_level": "technical",
+      "media_delivery": "RMA-000",
+      "primary": {
+        "model_id": "llama3.2-vision:11b-instruct-q4_K_M",
+        "variant": "11B Instruct Q4_K_M",
+        "source": "https://ollama.com/library/llama3.2-vision/tags",
+        "immutable_digest": "6f2f9757ae97"
+      },
+      "settings": {
+        "temperature": 0.0,
+        "seed": 6008,
+        "num_ctx": 32768,
+        "num_predict": 8192,
+        "network": false,
+        "tools": [],
+        "follow_up": false
+      },
+      "preflight_status": "pending"
+    },
+    {
+      "slot_id": "T000-SLOT-008",
+      "planned_run_id": "T000-RUN-009",
+      "provider": "Meta / Ollama distribution",
+      "model_family": "Llama-3.2-Vision",
+      "interface": "local",
+      "isolation_level": "technical",
+      "media_delivery": "RMA-000",
+      "primary": {
+        "model_id": "llama3.2-vision:11b-instruct-q8_0",
+        "variant": "11B Instruct Q8_0",
+        "source": "https://ollama.com/library/llama3.2-vision/tags",
+        "immutable_digest": "a5b7471a68aa"
+      },
+      "settings": {
+        "temperature": 0.0,
+        "seed": 6009,
+        "num_ctx": 32768,
+        "num_predict": 8192,
+        "network": false,
+        "tools": [],
+        "follow_up": false
+      },
+      "preflight_status": "pending"
+    }
+  ],
+  "balance": {
+    "planned_slots": 8,
+    "declared_families": 4,
+    "slots_per_family": 2,
+    "technically_isolated_slots": 6
+  }
+}

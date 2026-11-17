@@ -8,6 +8,7 @@
   "required": [
     "schema",
     "run_id",
+    "slot_id",
     "batch_id",
     "transmission_id",
     "status",
@@ -19,6 +20,7 @@
   "properties": {
     "schema": { "const": "RECEIVER-RUN-METADATA-000" },
     "run_id": { "type": "string", "pattern": "^T[0-9]{3,}-RUN-[0-9]{3,}$" },
+    "slot_id": { "type": "string", "pattern": "^T[0-9]{3,}-SLOT-[0-9]{3,}$" },
     "batch_id": { "type": "string", "pattern": "^T[0-9]{3,}-REPLICATION-BATCH-[0-9]{3,}$" },
     "transmission_id": { "type": "string", "pattern": "^T[0-9]{3,}$" },
     "status": { "enum": ["planned", "completed", "aborted"] },
@@ -61,7 +63,7 @@
         "fresh_context": { "const": true },
         "inherited_project_context": { "const": false },
         "prior_receiver_answer_access": { "const": false },
-        "network_access": { "enum": ["disabled", "available-not-used", "used", "unknown"] },
+        "network_access": { "enum": ["disabled", "transport-only", "available-not-used", "used", "unknown"] },
         "repository_access": { "enum": ["disabled", "available-not-used", "used", "unknown"] },
         "isolation_level": { "enum": ["technical", "procedural", "unknown"] },
         "reprompted_after_receiver_output": { "const": false },
