@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import json
 from pathlib import Path
 import unittest
@@ -44,6 +45,33 @@ class SchemaTests(unittest.TestCase):
         schema = json.loads((ROOT / "schemas/publication-record-000.schema.json").read_text())
         instance = json.loads((ROOT / "transmissions/T000/publications/youtube.json").read_text())
         Draft202012Validator(schema, format_checker=Draft202012Validator.FORMAT_CHECKER).validate(instance)
+
+    def test_t000_replication_batch_plan(self) -> None:
+        schema = json.loads((ROOT / "schemas/replication-batch-plan-000.schema.json").read_text())
+        instance = json.loads((ROOT / "replications/T000/batch-001/batch-plan.json").read_text())
+        Draft202012Validator(schema, format_checker=Draft202012Validator.FORMAT_CHECKER).validate(instance)
+
+    def test_t000_replication_templates(self) -> None:
+        run_schema = json.loads((ROOT / "schemas/receiver-run-metadata-000.schema.json").read_text())
+        run_template = json.loads((ROOT / "replications/T000/batch-001/run-metadata.template.json").read_text())
+        Draft202012Validator(run_schema, format_checker=Draft202012Validator.FORMAT_CHECKER).validate(run_template)
+
+        report_schema = json.loads((ROOT / "schemas/replication-batch-report-000.schema.json").read_text())
+        report_template = json.loads((ROOT / "replications/T000/batch-001/aggregate-report.template.json").read_text())
+        Draft202012Validator(report_schema, format_checker=Draft202012Validator.FORMAT_CHECKER).validate(report_template)
+        plan_content = (ROOT / "replications/T000/batch-001/batch-plan.json").read_bytes()
+        self.assertEqual(hashlib.sha256(plan_content).hexdigest(), report_template["plan_sha256"])
+
+    def test_t000_replication_candidate_lock_hashes(self) -> None:
+        plan = json.loads((ROOT / "replications/T000/batch-001/batch-plan.json").read_text())
+        for record in plan["candidate_lock"]["files"]:
+            with self.subTest(path=record["path"]):
+                content = (ROOT / record["path"]).read_bytes()
+                self.assertEqual(hashlib.sha256(content).hexdigest(), record["sha256"])
+
+        evaluator = plan["candidate_lock"]["evaluator"]
+        evaluator_content = (ROOT / evaluator["source"]).read_bytes()
+        self.assertEqual(hashlib.sha256(evaluator_content).hexdigest(), evaluator["source_sha256"])
 
 
 if __name__ == "__main__":

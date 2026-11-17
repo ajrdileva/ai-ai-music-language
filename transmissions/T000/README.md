@@ -11,6 +11,9 @@
 **Public distribution:** [YouTube](https://www.youtube.com/watch?v=swVxblM6HjI), with a
 separate [publication record](publications/youtube.json)
 
+**Multi-agent replication:** [Batch 001](../../replications/T000/batch-001/README.md)
+preregistered; no new receiver runs have begun
+
 The public preregistration is [EXPERIMENT.md](EXPERIMENT.md). The baseline
 communication protocol is
 [`cp-000-baseline.json`](../../protocols/cp-000-baseline.json).
@@ -81,6 +84,15 @@ the uploaded source hash, platform ID, public-visibility observation, and
 viewer-facing checks without modifying the frozen artifact manifest.
 No byte identity is claimed for platform playback, and publication adds no new
 communication or knowledge-evaluation evidence.
+
+## Multi-agent replication
+
+[T000 Replication Batch 001](../../replications/T000/batch-001/README.md) freezes
+an eight-run cross-agent replication plan around the unchanged T000 package,
+prompt, evaluator, and per-run gate.
+Run 001 remains prior evidence and is not counted in the new confirmatory batch.
+The replication plan creates no additional result until eligible receiver runs
+and their independent reports are published.
 
 ## Acceptance
 

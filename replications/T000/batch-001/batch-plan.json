@@ -1,0 +1,143 @@
+{
+  "schema": "REPLICATION-BATCH-PLAN-000",
+  "batch_id": "T000-REPLICATION-BATCH-001",
+  "transmission_id": "T000",
+  "status": "preregistered",
+  "preregistered_on": "2026-11-17",
+  "research_question": "Can a diverse batch of unfamiliar AI receiver agents recover the frozen T000 communication target from the identical cold-start package under controlled context conditions?",
+  "prior_evidence": {
+    "excluded_from_confirmatory_batch": true,
+    "references": [
+      "../../../evaluations/T000/run-001/README.md"
+    ]
+  },
+  "candidate_lock": {
+    "repository_commit": "cbad6f1bc2708e7af80d2d0012e948defb1ee981",
+    "files": [
+      {
+        "path": "transmissions/T000/RECEIVER-PROMPT.md",
+        "sha256": "6a73d122ea080663105e288e14d9ad8ab5b598f20e7e1fd189165be70b0ae888",
+        "receiver_access": "provided"
+      },
+      {
+        "path": "transmissions/T000/receiver-package.json",
+        "sha256": "af3b0b37fed85ae4a97a2cd3b92b14b3ee5d2f74591e1a2fcbfabd12a43e274b",
+        "receiver_access": "provided"
+      },
+      {
+        "path": "protocols/cp-000-baseline.json",
+        "sha256": "8f5de2492935394f8c52607bc3c228e6f8d27d799459339c9471a634b0c0f199",
+        "receiver_access": "provided"
+      },
+      {
+        "path": "schemas/receiver-response-000.schema.json",
+        "sha256": "8442a7f311f9cdc8e69bda8b7dc20690de5e8c4932cebf6315b0bf26c427ef1c",
+        "receiver_access": "provided"
+      },
+      {
+        "path": "transmissions/T000/artifacts/manifest.json",
+        "sha256": "7b12d8121a72e9c60756a3782f95bad5b092a21833572bf90d3861b190cb5673",
+        "receiver_access": "provided"
+      },
+      {
+        "path": "transmissions/T000/artifacts/reproducibility-report.json",
+        "sha256": "f9d1dec2c2af90d608f126142a508c884dbda2eb2209280a040c1f6838524c7f",
+        "receiver_access": "provided"
+      },
+      {
+        "path": "transmissions/T000/artifacts/T000.mp4",
+        "sha256": "735ca649cdcf482bbf5d65a66d8faf1ca4f9b267d5959b9dbd89289a0c2a282e",
+        "receiver_access": "provided"
+      },
+      {
+        "path": "transmissions/T000/artifacts/T000.wav",
+        "sha256": "8c50bfbe901177c711f6bbd11b49efd8b2416dc82171e593a1b2b57849e332ad",
+        "receiver_access": "provided"
+      },
+      {
+        "path": "transmissions/T000/artifacts/T000-thumbnail.png",
+        "sha256": "52e198b7a3491bb1f93718f319600656c792c5f5aa046bc241acaf5a66cb1e14",
+        "receiver_access": "provided"
+      },
+      {
+        "path": "transmissions/T000/reveal/ground-truth.mrm.json",
+        "sha256": "0648deff711676eb67409c2240874fb22203218231476cfb8cf3a06c7db538d9",
+        "receiver_access": "forbidden"
+      },
+      {
+        "path": "schemas/ies-c000.schema.json",
+        "sha256": "dc801ab48204acea94ce159a88933ffbd5af0ed1db5d620f608820b035ff25fa",
+        "receiver_access": "evaluator-only"
+      }
+    ],
+    "evaluator": {
+      "id": "iamp-t000-evaluator",
+      "version": "0.1.0",
+      "source": "src/iamp_engine/evaluate.py",
+      "source_sha256": "32753eea01dcd00221f558c9f6e44ad8ec225e79e8d303bbf39d314bd39eb965"
+    }
+  },
+  "sampling": {
+    "target_eligible_runs": 8,
+    "minimum_distinct_model_families": 4,
+    "maximum_eligible_runs_per_family": 2,
+    "minimum_technically_isolated_runs": 4
+  },
+  "context_control": {
+    "identical_files_required": true,
+    "fresh_context_required": true,
+    "prior_answers_forbidden": true,
+    "ground_truth_forbidden": true,
+    "follow_up_coaching_forbidden": true,
+    "results_hidden_until_batch_close": true
+  },
+  "per_run_gate": {
+    "schema_valid": true,
+    "protocol_identity_recovered": true,
+    "event_precision": 1.0,
+    "event_recall": 1.0,
+    "event_f1": 1.0,
+    "pitch_accuracy": 1.0,
+    "maximum_onset_error_ticks": 60,
+    "maximum_duration_error_ticks": 60,
+    "temporal_relations_exact": true,
+    "forbidden_context_used": false
+  },
+  "batch_gate": {
+    "minimum_passing_runs": 6,
+    "minimum_pass_rate": 0.75,
+    "minimum_distinct_families_with_a_pass": 3,
+    "required_eligible_runs_before_verdict": 8
+  },
+  "secondary_metrics": [
+    {
+      "name": "velocity_mae",
+      "gating": false
+    },
+    {
+      "name": "velocity_within_8_units",
+      "gating": false,
+      "tolerance": 8
+    }
+  ],
+  "stop_and_deviation_rules": [
+    "Do not declare batch success or failure before eight eligible runs and the required family diversity are present.",
+    "Replace excluded or aborted attempts with later run IDs; preserve every attempted run and exclusion reason.",
+    "A schema-invalid or incorrect first receiver answer is an eligible failure, not an exclusion.",
+    "Exclude a run if the receiver had ground-truth, prior-answer, inherited-project, or undeclared external context.",
+    "Do not change the candidate, prompt, evaluator, thresholds, or eligibility rules after the first new run begins.",
+    "Any post-start change creates a separately versioned exploratory batch rather than modifying this confirmatory batch."
+  ],
+  "epistemic_interpretation": {
+    "current_state": "?",
+    "pass_supports_state": "W",
+    "pass_claim": "CP-000 supports reproducible cold-start recovery across the sampled receiver families under the preregistered package and context conditions.",
+    "non_claims": [
+      "universal protocol generalization",
+      "statistical independence of model families",
+      "musical understanding or knowledge development",
+      "successful velocity recovery",
+      "robustness to future training-data contamination"
+    ]
+  }
+}

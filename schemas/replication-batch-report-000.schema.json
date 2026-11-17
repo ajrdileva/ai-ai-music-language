@@ -1,0 +1,119 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ajrdileva/ai-ai-music-language/blob/main/schemas/replication-batch-report-000.schema.json",
+  "title": "Replication Batch Report 000",
+  "description": "Draft aggregate report for a preregistered multi-agent replication batch.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "batch_id",
+    "transmission_id",
+    "plan_ref",
+    "plan_sha256",
+    "status",
+    "counts",
+    "run_records",
+    "aggregate",
+    "verdict",
+    "exclusions",
+    "limitations",
+    "epistemic_interpretation"
+  ],
+  "properties": {
+    "schema": { "const": "REPLICATION-BATCH-REPORT-000" },
+    "batch_id": { "type": "string", "pattern": "^T[0-9]{3,}-REPLICATION-BATCH-[0-9]{3,}$" },
+    "transmission_id": { "type": "string", "pattern": "^T[0-9]{3,}$" },
+    "plan_ref": { "type": "string", "format": "uri-reference" },
+    "plan_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "status": { "enum": ["planned", "in-progress", "complete"] },
+    "counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["attempted", "eligible", "passing", "failing", "excluded", "distinct_model_families", "technically_isolated"],
+      "properties": {
+        "attempted": { "type": "integer", "minimum": 0 },
+        "eligible": { "type": "integer", "minimum": 0 },
+        "passing": { "type": "integer", "minimum": 0 },
+        "failing": { "type": "integer", "minimum": 0 },
+        "excluded": { "type": "integer", "minimum": 0 },
+        "distinct_model_families": { "type": "integer", "minimum": 0 },
+        "technically_isolated": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "run_records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["run_id", "model_family", "metadata_ref", "eligible", "verdict"],
+        "properties": {
+          "run_id": { "type": "string", "pattern": "^T[0-9]{3,}-RUN-[0-9]{3,}$" },
+          "model_family": { "type": "string", "minLength": 1 },
+          "metadata_ref": { "type": "string", "format": "uri-reference" },
+          "evaluation_ref": { "type": "string", "format": "uri-reference" },
+          "eligible": { "type": "boolean" },
+          "verdict": { "enum": ["pass", "fail", "excluded", "pending"] }
+        }
+      }
+    },
+    "aggregate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["pass_rate", "family_pass_count", "primary_gate_met", "velocity_mae_mean", "velocity_within_8_mean"],
+      "properties": {
+        "pass_rate": { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
+        "family_pass_count": { "type": "integer", "minimum": 0 },
+        "primary_gate_met": { "type": ["boolean", "null"] },
+        "velocity_mae_mean": { "type": ["number", "null"], "minimum": 0 },
+        "velocity_within_8_mean": { "type": ["number", "null"], "minimum": 0, "maximum": 1 }
+      }
+    },
+    "verdict": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "summary"],
+      "properties": {
+        "status": { "enum": ["pending", "pass", "fail", "inconclusive"] },
+        "summary": { "type": "string", "minLength": 1 }
+      }
+    },
+    "exclusions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["run_id", "reason"],
+        "properties": {
+          "run_id": { "type": "string", "pattern": "^T[0-9]{3,}-RUN-[0-9]{3,}$" },
+          "reason": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "limitations": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "epistemic_interpretation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state", "claim", "conditions", "evidence_refs", "non_claims"],
+      "properties": {
+        "state": { "enum": ["E", "W", "H", "?"] },
+        "claim": { "type": "string", "minLength": 1 },
+        "conditions": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": { "type": "string", "format": "uri-reference" }
+        },
+        "non_claims": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
+        }
+      }
+    }
+  }
+}
