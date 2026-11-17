@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ajrdileva/ai-ai-music-language/blob/main/schemas/publication-record-000.schema.json",
+  "title": "Publication Record 000",
+  "description": "Draft distribution record for a transmission published through an external platform.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "record_id",
+    "transmission_id",
+    "platform",
+    "platform_asset_id",
+    "url",
+    "channel",
+    "visibility",
+    "visibility_observed_at",
+    "source_artifact",
+    "checks",
+    "epistemic_scope"
+  ],
+  "properties": {
+    "schema": { "const": "PUBLICATION-RECORD-000" },
+    "record_id": { "type": "string", "pattern": "^T[0-9]{3,}-[A-Z0-9-]+$" },
+    "transmission_id": { "type": "string", "pattern": "^T[0-9]{3,}$" },
+    "platform": { "type": "string", "minLength": 1 },
+    "platform_asset_id": { "type": "string", "minLength": 1 },
+    "url": { "type": "string", "format": "uri" },
+    "alternate_url": { "type": "string", "format": "uri" },
+    "channel": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "handle", "url"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "handle": { "type": "string", "minLength": 1 },
+        "url": { "type": "string", "format": "uri" }
+      }
+    },
+    "visibility": { "enum": ["private", "unlisted", "public"] },
+    "visibility_observed_at": { "type": "string", "format": "date-time" },
+    "source_artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256", "upload_source_hash_verified", "platform_byte_identity"],
+      "properties": {
+        "path": { "type": "string", "minLength": 1 },
+        "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "upload_source_hash_verified": { "type": "boolean" },
+        "platform_byte_identity": { "enum": ["verified", "not-verified", "not-claimed"] }
+      }
+    },
+    "checks": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "platform_processing",
+        "platform_copyright_check",
+        "description_links_clickable",
+        "pinned_cold_start_comment",
+        "viewer_playback"
+      ],
+      "properties": {
+        "platform_processing": { "enum": ["complete", "pending", "failed", "unknown"] },
+        "platform_copyright_check": { "enum": ["no-issues-reported", "issues-reported", "pending", "unknown"] },
+        "description_links_clickable": { "type": "boolean" },
+        "pinned_cold_start_comment": { "type": "boolean" },
+        "viewer_playback": { "enum": ["human-reported-pass", "checked", "not-checked", "failed"] }
+      }
+    },
+    "epistemic_scope": { "type": "string", "minLength": 1 },
+    "notes": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    }
+  }
+}
