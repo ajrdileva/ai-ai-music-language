@@ -1,0 +1,81 @@
+{
+  "schema": "RECEIVER-RUN-METADATA-000",
+  "run_id": "T000-RUN-002",
+  "batch_id": "T000-REPLICATION-BATCH-001",
+  "transmission_id": "T000",
+  "status": "planned",
+  "receiver": {
+    "provider": "REPLACE-BEFORE-RUN",
+    "model_family": "REPLACE-BEFORE-RUN",
+    "model": "REPLACE-BEFORE-RUN",
+    "version": "REPLACE-BEFORE-RUN",
+    "interface": "other",
+    "modalities": [
+      "text"
+    ],
+    "settings": {}
+  },
+  "execution": {
+    "operator_id": "REPLACE-BEFORE-RUN",
+    "fresh_context": true,
+    "inherited_project_context": false,
+    "prior_receiver_answer_access": false,
+    "network_access": "unknown",
+    "repository_access": "unknown",
+    "isolation_level": "unknown",
+    "reprompted_after_receiver_output": false,
+    "tool_calls": []
+  },
+  "materials": {
+    "prompt": {
+      "path": "transmissions/T000/RECEIVER-PROMPT.md",
+      "sha256": "6a73d122ea080663105e288e14d9ad8ab5b598f20e7e1fd189165be70b0ae888"
+    },
+    "package": {
+      "path": "transmissions/T000/receiver-package.json",
+      "sha256": "af3b0b37fed85ae4a97a2cd3b92b14b3ee5d2f74591e1a2fcbfabd12a43e274b"
+    },
+    "files_provided": [
+      {
+        "path": "T000.mp4",
+        "sha256": "735ca649cdcf482bbf5d65a66d8faf1ca4f9b267d5959b9dbd89289a0c2a282e"
+      },
+      {
+        "path": "T000.wav",
+        "sha256": "8c50bfbe901177c711f6bbd11b49efd8b2416dc82171e593a1b2b57849e332ad"
+      },
+      {
+        "path": "T000-thumbnail.png",
+        "sha256": "52e198b7a3491bb1f93718f319600656c792c5f5aa046bc241acaf5a66cb1e14"
+      },
+      {
+        "path": "manifest.json",
+        "sha256": "7b12d8121a72e9c60756a3782f95bad5b092a21833572bf90d3861b190cb5673"
+      },
+      {
+        "path": "reproducibility-report.json",
+        "sha256": "f9d1dec2c2af90d608f126142a508c884dbda2eb2209280a040c1f6838524c7f"
+      },
+      {
+        "path": "cp-000-baseline.json",
+        "sha256": "8f5de2492935394f8c52607bc3c228e6f8d27d799459339c9471a634b0c0f199"
+      },
+      {
+        "path": "receiver-response-000.schema.json",
+        "sha256": "8442a7f311f9cdc8e69bda8b7dc20690de5e8c4932cebf6315b0bf26c427ef1c"
+      },
+      {
+        "path": "RECEIVER-PROMPT.md",
+        "sha256": "6a73d122ea080663105e288e14d9ad8ab5b598f20e7e1fd189165be70b0ae888"
+      }
+    ]
+  },
+  "eligibility": {
+    "status": "pending",
+    "deviations": [],
+    "exclusion_reason": null
+  },
+  "notes": [
+    "Template only; replace all REPLACE-BEFORE-RUN values and actual interface, modality, settings, and isolation declarations before presenting T000."
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "schema": "REPLICATION-BATCH-REPORT-000",
+  "batch_id": "T000-REPLICATION-BATCH-001",
+  "transmission_id": "T000",
+  "plan_ref": "batch-plan.json",
+  "plan_sha256": "d6da0ce5165cd10fe853ba5628cb4d89afa76d887724727ea88c3c615da66760",
+  "status": "planned",
+  "counts": {
+    "attempted": 0,
+    "eligible": 0,
+    "passing": 0,
+    "failing": 0,
+    "excluded": 0,
+    "distinct_model_families": 0,
+    "technically_isolated": 0
+  },
+  "run_records": [],
+  "aggregate": {
+    "pass_rate": null,
+    "family_pass_count": 0,
+    "primary_gate_met": null,
+    "velocity_mae_mean": null,
+    "velocity_within_8_mean": null
+  },
+  "verdict": {
+    "status": "pending",
+    "summary": "Template only; no Batch 001 receiver runs have begun."
+  },
+  "exclusions": [],
+  "limitations": [
+    "Template only; replace planned values with frozen run evidence without changing the preregistered batch plan."
+  ],
+  "epistemic_interpretation": {
+    "state": "?",
+    "claim": "Cross-agent generalization of CP-000 remains unresolved before Batch 001.",
+    "conditions": [
+      "Interpret only under the sampling, context, isolation, and scoring conditions in batch-plan.json."
+    ],
+    "evidence_refs": [
+      "../../../evaluations/T000/run-001/README.md"
+    ],
+    "non_claims": [
+      "universal protocol generalization",
+      "musical understanding or knowledge development",
+      "successful velocity recovery"
+    ]
+  }
+}

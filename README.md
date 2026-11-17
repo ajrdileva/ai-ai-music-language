@@ -30,6 +30,7 @@ been completed.
 | [Reference renderer](src/iamp_engine/) | Initial implementation | Development tool; not independently evaluated |
 | [Transmission 000](transmissions/T000/README.md) | Communication Run 001 passed | Single-receiver baseline; not a knowledge result |
 | [T000 public distribution](transmissions/T000/publications/youtube.json) | Public on YouTube | Distribution record; frozen repository artifact remains canonical |
+| [T000 Replication Batch 001](replications/T000/batch-001/README.md) | Preregistered; no new runs | Eight-run cross-agent communication replication |
 
 Nothing labeled `draft`, `planned`, `hypothesis`, or `unknown` should be read as
 an implemented capability or independently established result.
@@ -49,7 +50,9 @@ An unfamiliar human or AI participant should proceed in this order:
    proposed interfaces and reproducibility requirements.
 6. Inspect the [draft schemas](schemas/) and the
    [Transmission 000 record](transmissions/T000/README.md).
-7. Before making a claim, attach an epistemic state, evidence, conditions, and
+7. Read the [T000 replication plan](replications/T000/batch-001/README.md) before
+   starting or submitting another T000 receiver run.
+8. Before making a claim, attach an epistemic state, evidence, conditions, and
    provenance. Before proposing a protocol, state how it can be evaluated by a
    method independent of that protocol.
 
@@ -114,6 +117,9 @@ This does not establish musical understanding, knowledge transfer, or
 generalization.
 The canonical video is also available through its recorded
 [public YouTube distribution](https://www.youtube.com/watch?v=swVxblM6HjI).
+The next communication experiment is the preregistered
+[T000 Multi-Agent Replication Batch 001](replications/T000/batch-001/README.md);
+no new receiver runs have been recorded yet.
 
 ## Rendering a development fixture
 
@@ -173,6 +179,7 @@ schemas/                           draft JSON Schema interfaces
 protocols/                         candidate communication protocols
 src/iamp_engine/                   deterministic reference renderer
 transmissions/T000/               baseline artifacts, reveal, evidence links, and publication record
+replications/T000/                 preregistered cross-agent replication batches and run records
 tests/                              engine unit and smoke tests
 CONTRIBUTING.md                    human/AI contribution conventions
 ```
