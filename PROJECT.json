@@ -8,6 +8,7 @@
     "foundation": "accepted",
     "engine": "initial-implementation",
     "transmission_000": "communication-baseline-evaluated",
+    "transmission_000_publication": "public-distribution-recorded",
     "independent_tests": "run-001-pass",
     "knowledge_evaluation": "not-run"
   },
@@ -27,7 +28,11 @@
     "knowledge_claim": "schemas/knowledge-claim-000.schema.json",
     "receiver_response": "schemas/receiver-response-000.schema.json",
     "ground_truth_commitment": "schemas/ground-truth-commitment-000.schema.json",
-    "receiver_package": "schemas/receiver-package-000.schema.json"
+    "receiver_package": "schemas/receiver-package-000.schema.json",
+    "publication_record": "schemas/publication-record-000.schema.json"
+  },
+  "publications": {
+    "T000-YOUTUBE-001": "transmissions/T000/publications/youtube.json"
   },
   "epistemic_states": {
     "E": "established under stated experimental conditions",

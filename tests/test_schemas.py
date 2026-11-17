@@ -40,6 +40,11 @@ class SchemaTests(unittest.TestCase):
         instance = json.loads((ROOT / "transmissions/T000/receiver-package.json").read_text())
         Draft202012Validator(schema, format_checker=Draft202012Validator.FORMAT_CHECKER).validate(instance)
 
+    def test_t000_youtube_publication_record(self) -> None:
+        schema = json.loads((ROOT / "schemas/publication-record-000.schema.json").read_text())
+        instance = json.loads((ROOT / "transmissions/T000/publications/youtube.json").read_text())
+        Draft202012Validator(schema, format_checker=Draft202012Validator.FORMAT_CHECKER).validate(instance)
+
 
 if __name__ == "__main__":
     unittest.main()
